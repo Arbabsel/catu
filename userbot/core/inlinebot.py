@@ -67,7 +67,7 @@ def main_menu():
         ),
         (
             Button.inline(f"🧰 ابزار ({len(GRP_INFO['tools'])})", data="tools_menu"),
-            Button.inline(f"🗂 کاربردی ({len(GRP_INFO['utils'])})", data="utils_menu"),
+            Button.inline(f"🗂 کاربردها ({len(GRP_INFO['utils'])})", data="utils_menu"),
         ),
         (
             Button.inline(f"➕ بیشتر ({len(GRP_INFO['extra'])})", data="extra_menu"),
