@@ -82,7 +82,7 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
                 remwarns=remwarns,
             )
         else:
-            USER_BOT_WARN_ZERO = f"**You were spamming** {my_mention}**'s inbox, henceforth you have been blocked.Ask Him personal unblock**"
+            USER_BOT_WARN_ZERO = f"**شما اسپم میکردید** {my_mention}**به دلیل اسپم بلاک شدین❌**"
         msg = await event.reply(USER_BOT_WARN_ZERO)
         await event.client(functions.contacts.BlockRequest(chat.id))
         the_message = f"#BLOCKED_PM\
@@ -119,17 +119,17 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             remwarns=remwarns,
         )
     elif gvarstatus("pmmenu") is None:
-        USER_BOT_NO_WARN = f"""__Hi__ {mention}__, I haven't approved you yet to personal message. 
+        USER_BOT_NO_WARN = f"""__جناپ__ {mention}__ من هنوز شمارا برای پیام شخصی تایید نکردم 
 
-You have {warns}/{totalwarns} warns until you get blocked by the Assistant bot.
+😐 {warns}/{totalwarns} هشدار میدم تا زمانی که ربات بلاکت نکرده
 
-Choose an option from below to specify the reason of your message and wait for me to check it. __⬇️"""
+یکی از گزینه های زیر را انتخاب کنید تا دلیل پیام خود را مشخص کنید و منتظر بمانید تا آن را بررسی کنم. __⬇️"""
     else:
-        USER_BOT_NO_WARN = f"""__Hi__ {mention}__, I haven't approved you yet to personal message me.
+        USER_BOT_NO_WARN = f"""__جناپ__ {mention}__من هنوز شمارا برای پیام شخصی تایید نکردم
 
-You have {warns}/{totalwarns} warns until you get blocked by the CatUserbot.
+😐 {warns}/{totalwarns} هشدار بهت میدم تا زمانی که ربات بلاکت نکرده.
 
-Don't spam my inbox. say reason and wait until my response.__"""
+پیویمو اسپم نکن.دلیل بگو و منتظر جواب باش__"""
     addgvar("pmpermit_text", USER_BOT_NO_WARN)
     PM_WARNS[str(chat.id)] += 1
     try:
@@ -184,7 +184,7 @@ async def do_pm_options_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = "__Select option from above message and wait. Don't spam my inbox, this is your last warning.__"
+        text = "__⚠از پیام بالا گزینه را انتخاب کنید و منتظر بمانید. پیویمو اسپم نکن، این آخرین هشدار شماست.__"
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -203,13 +203,13 @@ async def do_pm_options_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \\\x1fThough you ignored that message.So, I simply blocked you. \\\x1fNow you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**اگر درست یادم باشد در پیام قبلی خود اشاره کردم که اینجا مکان مناسبی برای اسپم کردن شما نیست.\\\x1fگرچه شما آن پیام را نادیده گرفتید. بنابراین، من به سادگی شما را مسدود کردم.\\\x1fحالا نمی‌توانید کاری انجام دهید، مگر اینکه استاد من آنلاین شود و شما را رفع انسداد کند.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                             \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Reason:** __He/She didn't opt for any provided options and kept on messaging.__"
+                            \n**Reason:** __او هیچ یک از گزینه های ارائه شده را انتخاب نکرد و به پیام دادن ادامه داد__"
     sqllist.rm_from_list("pmoptions", chat.id)
     try:
         return await event.client.send_message(
@@ -230,9 +230,9 @@ async def do_pm_enquire_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey! Have some patience 😅. My master has not seen your message yet. \
-__My master will respond when HE comes online, if HE wants to.__
-**🤖 Please do not spam unless you wish to be blocked and reported 🤖**"""
+        text = """__هی! کمی صبر داشته باش 😅 استاد من هنوز پیام شما را ندیده است.  \
+__اگر او بخواهد، وقتی او آنلاین شود، استاد من پاسخ خواهد داد__
+**🤖 لطفا از اسپم خودداری کنید مگر اینکه بخواهید بلاک و گزارش شوید 🤖**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
