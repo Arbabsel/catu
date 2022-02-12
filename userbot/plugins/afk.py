@@ -115,7 +115,7 @@ async def on_afk(event):  # sourcery no-metrics
         if AFK_.afk_type == "media":
             if AFK_.reason:
                 message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                    f"`من آفلاینم .\n\nزمان آفلاینی {endtime}\nدلیل: {AFK_.reason}`"
                 )
             else:
                 message_to_reply = f"`من آفلاینم .\n\nزمان آفلاینی {endtime}\nدلیل: نمیتوانم پاسخ شمارا بدهم`"
@@ -131,7 +131,7 @@ async def on_afk(event):  # sourcery no-metrics
                     f"`من آفلاینم .\n\nزمان آفلاینی {endtime}\nدلیل: {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`من آفلاینم .\n\nAFK زمان آفلاینی {endtime}\nدلیل: نمیتوانم پاسخ شمارا بدهم"
+                message_to_reply = f"`من آفلاینم .\n\nزمان آفلاینی {endtime}\nدلیل: نمیتوانم پاسخ شمارا بدهم"
             if event.chat_id:
                 msg = await event.reply(message_to_reply)
         if event.chat_id in AFK_.last_afk_message:
