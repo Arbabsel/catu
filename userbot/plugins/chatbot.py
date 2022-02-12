@@ -20,13 +20,22 @@ from ..sql_helper.globals import gvarstatus
 plugin_category = "fun"
 
 tired_response = [
-    "I am little tired, Please give me some rest",
-    "Who are you to ask me questions Continuously",
-    "Leave me alone for some times",
-    "Time to Sleep, I will get back to you soon",
-    "I have a job to do, Come back later",
-    "I need to rest, leave me alone for some times",
-    "I am not feeling well, Please Come back later",
+    "کیرم تو کص مادرت ولد زنا",
+    "ریدم دهنه مادرت کیری ننه زیر خواب",
+    "تف تو لا  ممه های مادرت😔",
+    "زجه بزن ننه کاندومی",
+    "انقد زجه بزن تا مادرت حمله بشه",
+    "کیر عربی تو کص ننت داش خخخ",
+    "اوبی ممبر ",
+    "کص خارت تیز باش عع",
+    "ای کص ناموست ننه زیر",
+    "ننت زیر چیکار میکنه داش",
+    "آبجیتو همینجا حامله کردم",
+    "مادرت چه ممه هایی داره بزارم لا ممه هاش🤤",
+    "بیا برو تو کص ننت درم ببند باوو",
+    "حرص میخوری که چی تخم خر آخرش ننت ماله خودمه:)",
+    "صیک کن تو کص خارت نبینمت حرومی",
+    
 ]
 
 
@@ -66,7 +75,7 @@ async def add_chatbot(event):
     except Exception as e:
         await edit_delete(catevent, f"**Error:**\n`{e}`")
     else:
-        await edit_or_reply(catevent, "Hi")
+        await edit_or_reply(catevent, "خب کیری زجه بزن")
 
 
 @catub.cat_cmd(
