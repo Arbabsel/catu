@@ -473,17 +473,17 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who messages you, not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = f"""Ok, Now you are accessing the availabe menu of my master, {mention}.
-__Let's make this smooth and let me know why you are here.__
+    text = f"""خب، اکنون به منوی استاد من دسترسی دارید, {mention}.
+__و بیاید به من بگویید که چرا اینجا هستید__
 
-**Choose one of the following reasons why you are here:**"""
+**یکی از دلایل زیر را برای حضور شما در اینجا انتخاب کنید:**"""
     buttons = [
-        (Button.inline(text="To enquire something.", data="to_enquire_something"),),
-        (Button.inline(text="To request something.", data="to_request_something"),),
-        (Button.inline(text="To chat with my master.", data="to_chat_with_my_master"),),
+        (Button.inline(text="پرس و جو کرن چیزی", data="to_enquire_something"),),
+        (Button.inline(text="درخواست چیزی", data="to_request_something"),),
+        (Button.inline(text="برای چت کردن", data="to_chat_with_my_master"),),
         (
             Button.inline(
-                text="To spam my master's inbox.",
+                text="اسپم کردن پی وی",
                 data="to_spam_my_master_inbox",
             ),
         ),
@@ -548,8 +548,8 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who message you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__بله مطمئنم که ما می توانیم یک چت دوستانه داشته باشیم اما نه در حال حاضر. ما نمی توانیم این را داشته باشیم\
-در حال حاضر کمی سرم شلوغ است. وقتی آنلاین شوم. من به پیام خواهم داد، این مطمئناً.__"""
+    text = """__بله مطمئنم که ما می توانیم یک چت دوستانه داشته باشیم اما نه در حال حاضر. ما نمی توانیم فعلا چتی داشته باشیم
+در حال حاضر کمی سرم شلوغ است. وقتی آنلاین بشم. من به شما پیام خواهم داد، این مطمئناً.__"""
     sqllist.add_to_list("pmchat", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -581,8 +581,8 @@ async def on_plug_in_callback_query_handler(event):
          \n░░░░░░░░░░░█░░█\
          \n░░░░░░░░░░░█░░█\
          \n░░░░░░░░░░░░▀▀`\
-         \n**So uncool, this is not your home. Go bother somewhere else.\
-         \n\nAnd this is your last warning if you send one more message you will be blocked automatically 🤖**"
+         \n**جناپ اینجا جای کصشعر گفتن نیست برو یجا دیگه \
+         \n\nو این آخرین اخطار شماست اگر یک پیام دیگر بفرستید به طور خودکار بلاک خواهید شد🤖**"
     sqllist.add_to_list("pmspam", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmspam").json
