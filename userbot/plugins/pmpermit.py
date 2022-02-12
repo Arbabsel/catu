@@ -209,7 +209,7 @@ async def do_pm_options_action(event, chat):
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                             \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Reason:** __او هیچ یک از گزینه های ارائه شده را انتخاب نکرد و به پیام دادن ادامه داد__"
+                            \n**دلیل:** __او هیچ یک از گزینه های ارائه شده را انتخاب نکرد و به پیام دادن ادامه داد__"
     sqllist.rm_from_list("pmoptions", chat.id)
     try:
         return await event.client.send_message(
@@ -251,13 +251,13 @@ __اگر او بخواهد، وقتی او آنلاین شود، استاد من
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**🤖 If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \\\x1fThough you ignored that message. So, I simply blocked you. \\\x1fNow you can't do anything unless my master comes online and unblocks you 😌**"
+    USER_BOT_WARN_ZERO = "**🤖 اگر درست یادم باشد در پیام قبلی خود اشاره کردم که اینجا مکان مناسبی برای اسپم کردن شما نیست.\\\x1fاگرچه شما آن پیام را نادیده گرفتید. بنابراین، من به سادگی شما را بلاک کردم. \\\x1fحالا کاری نمیتونی بکنی مگر اینکه استاد من انلاین بشه و رفع بلاکت کنه😌**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                 \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She opted for enquire option but didn't wait after being told also and kept on messaging so blocked.__"
+                \n**دلیل:** __او گزینه استعلام را انتخاب کرد، اما پس از آن که به او گفته شد صبر نکرد و همچنان به پیام ادامه داد و مسدود شد__"
     sqllist.rm_from_list("pmenquire", chat.id)
     try:
         return await event.client.send_message(
@@ -278,9 +278,9 @@ async def do_pm_request_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey have some patience 🙂. My master has not seen your message yet. \
-My master usually responds to people, though idk about some exceptional users.__
-**🤖 Please do not spam unless you wish to be blocked and reported 🤖**"""
+        text = """__هی صبر داشته باش 🙂 استاد من هنوز پیام شما را ندیده است. \
+استاد من معمولاً به مردم پاسخ می‌دهد، هرچند در مورد برخی از کاربران استثنایی نمی‌داند.__
+**🤖لطفاً از ارسال هرزنامه خودداری کنید مگر اینکه بخواهید بلاک و گزارش شوید🤖**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -299,13 +299,13 @@ My master usually responds to people, though idk about some exceptional users.__
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \\\x1fThough you ignored me and messaged me. So, i simply blocked you. \\\x1fNow you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**اگر درست یادم باشد در پیام قبلی خود اشاره کردم که اینجا مکان مناسبی برای اسپم کردن شما نیست. \\\x1fهرچند تو به من توجه نکردی و به من پیام دادی. بنابراین، من به سادگی شما را بلاک کردم. \\\x1fحالا کاری نمیتونی بکنی مگر اینکه استاد من انلاین بشه و تو رو انبلاک کنه.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                 \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She opted for the request option but didn't wait after being told also so blocked.__"
+                \n**دلیل:** __او گزینه درخواست را انتخاب کرد اما پس از اینکه به او گفته شد که مسدود شده است منتظر ماند.__"
     sqllist.rm_from_list("pmrequest", chat.id)
     try:
         return await event.client.send_message(
@@ -326,10 +326,10 @@ async def do_pm_chat_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Heyy! I am busy right now I already asked you to wait know. After my work finishes.\
-We can talk but not right know. Hope you understand.__
-__My master will respond when he/she comes back online, if he/she wants to.__
-**Please do not spam unless you wish to be blocked and reported.**"""
+        text = """__هی! من در حال حاضر مشغول هستم، قبلاً از شما خواسته بودم که منتظر بمانید. بعد از تموم شدن کارم\
+ما می توانیم صحبت کنیم اما درست نمی دانیم. امیدوارم متوجه شده باشی.__
+__استاد من اگر بخواهد وقتی آنلاین شد پاسخ می دهد.__
+**لطفاً از ارسال هرزنامه خودداری کنید مگر اینکه بخواهید بلاک و گزارش شوید.**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -348,13 +348,13 @@ __My master will respond when he/she comes back online, if he/she wants to.__
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam.\\\x1fThough you ignored that message. So, I simply blocked you 😌\\\x1fNow you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**اگر به درستی یادم باشد در پیام قبلی خود اشاره کردم این مکان مناسبی برای اسپم کردن شما نیست.\\\x1fاگرچه شما آن پیام را نادیده گرفتید. بنابراین، من شما را به سادگی بلاک کردم 😌\\\x1fحالا کاری نمیتونی بکنی مگر اینکه استاد من انلاین بشه و تو رو انبلاک کنه.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                 \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She select opted for the chat option but didn't wait after being told also so blocked.__"
+                \n**دلیل:** __او گزینه چت را انتخاب کرد اما پس از اینکه به او گفته شد که مسدود شده است صبر نکرد__"
     sqllist.rm_from_list("pmchat", chat.id)
     try:
         return await event.client.send_message(
@@ -376,13 +376,13 @@ async def do_pm_spam_action(event, chat):
             del PMMESSAGE_CACHE[str(chat.id)]
     except Exception as e:
         LOGS.info(str(e))
-    USER_BOT_WARN_ZERO = "**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. \\\x1fThough you ignored that message. So, I simply blocked you. \\\x1fNow you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = "**اگر به درستی یادم باشد در پیام قبلی خود اشاره کردم این مکان مناسبی برای اسپم کردن شما نیست.\\\x1fاگرچه شما آن پیام را نادیده گرفتید. بنابراین، من به سادگی شما را بلاک کردم. \\\x1fحالا کاری نمیتونی بکنی مگر اینکه استاد من انلاین بشه و تو رو انبلاک کنه.**"
 
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
                             \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Reason:** he opted for spam option and messaged again."
+                            \n**دلیل:** او گزینه اسپم را انتخاب کرد و دوباره پیام داد"
     sqllist.rm_from_list("pmspam", chat.id)
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     try:
@@ -505,9 +505,9 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. Your request has been registered. Do not spam my master's inbox now. \
-My master is busy right now, When My master comes online he will check your message and ping you. \
-Then we can extend this conversation more but not right now.__"""
+    text = """__باشه. درخواست شما ثبت شد اکنون پی وی من را اسپم نکنید.  \
+ استاد من در حال حاضر مشغول است، وقتی استاد من آنلاین شد پیام شما را بررسی می کند و به شما پاسخ میدهد.\
+سپس ما می توانیم این گفتگو را بیشتر گسترش دهیم، اما نه در حال حاضر.__"""
     sqllist.add_to_list("pmenquire", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -526,10 +526,10 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. I have notified my master about this. When he comes comes online\
- or when my master is free HE will look into this chat and will ping you so we can have a friendly chat.__\
+    text = """__باشه. من به استادم در این مورد اطلاع داده ام. وقتی آنلاین می شود \
+ وقتی استاد من آنلاین شود، او به این چت نگاه می کند و به شما پاسخ میدهد تا بتوانیم یک گپ دوستانه داشته باشیم.__\
 
-**🤖 But right now please do not spam unless you wish to get blocked 🤖**"""
+**🤖اما در حال حاضر لطفا از اسپم خودداری کنید مگر اینکه بخواهید بلاک شوید🤖**"""
     sqllist.add_to_list("pmrequest", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -548,8 +548,8 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who message you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Yaa sure we can have a friendly chat but not right now. we can have this\
-some other time. Right now I am a little busy. when I come online and if I am free. I will ping you ,this is Damm sure.__"""
+    text = """__بله مطمئنم که ما می توانیم یک چت دوستانه داشته باشیم اما نه در حال حاضر. ما نمی توانیم این را داشته باشیم\
+در حال حاضر کمی سرم شلوغ است. وقتی آنلاین شوم. من به پیام خواهم داد، این مطمئناً.__"""
     sqllist.add_to_list("pmchat", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
