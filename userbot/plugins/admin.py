@@ -73,7 +73,7 @@ plugin_category = "admin"
     command=("gpic", plugin_category),
     info={
         "header": "For changing group display pic or deleting display pic",
-        "description": "Reply to Image for changing display picture",
+        "description": "برای تغییر تصویر نمایش به تصویر ریپلای کنید",
         "flags": {
             "-s": "To set group pic",
             "-d": "To delete group pic",
@@ -120,12 +120,12 @@ async def set_group_photo(event):  # sourcery no-metrics
         except Exception as e:
             return await edit_delete(event, f"**Error : **`{e}`")
         process = "deleted"
-        await edit_delete(event, "```successfully group profile pic deleted.```")
+        await edit_delete(event, "```عکس نمایه گروهی با موفقیت حذف شد✅```")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
             "#GROUPPIC\n"
-            f"Group profile pic {process} successfully "
+            f"عکس پروفایل گروه {process} با موفقیت✅ "
             f"CHAT: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
         )
 
@@ -360,7 +360,7 @@ async def startmute(event):
         except Exception as e:
             await event.edit(f"**Error **\n`{e}`")
         else:
-            await event.edit("`Successfully muted that person.\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **`")
+            await event.edit("`با موفقیت این شخص خفه شد⚰\n**｀-´)⊃━☆ﾟ.*･｡ﾟ **`")
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
@@ -373,7 +373,7 @@ async def startmute(event):
         creator = chat.creator
         if not admin and not creator:
             return await edit_or_reply(
-                event, "`You can't mute a person without admin rights niqq.` ಥ﹏ಥ  "
+                event, "`بدون حقوق ادمین نمیتوانید شخصی را سکوت کنید` ಥ﹏ಥ  "
             )
         user, reason = await get_user_from_event(event)
         if not user:
@@ -382,14 +382,14 @@ async def startmute(event):
             return await edit_or_reply(event, "`Sorry, I can't mute myself`")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
-                event, "`This user is already muted in this chat ~~lmfao sed rip~~`"
+                event, "`این کاربر قبلاً در این گپ بی صدا شده است`"
             )
         result = await event.client.get_permissions(event.chat_id, user.id)
         try:
             if result.participant.banned_rights.send_messages:
                 return await edit_or_reply(
                     event,
-                    "`This user is already muted in this chat ~~lmfao sed rip~~`",
+                    "`این کاربر قبلاً در این گپ بی صدا شده است`",
                 )
         except AttributeError:
             pass
@@ -402,11 +402,11 @@ async def startmute(event):
                 if chat.admin_rights.delete_messages is not True:
                     return await edit_or_reply(
                         event,
-                        "`You can't mute a person if you dont have delete messages permission. ಥ﹏ಥ`",
+                        "`اگر مجوز حذف پیام‌ها را نداشته باشید، نمی‌توانید فردی را بی‌صدا کنید.",
                     )
             elif "creator" not in vars(chat):
                 return await edit_or_reply(
-                    event, "`You can't mute a person without admin rights niqq.` ಥ﹏ಥ  "
+                    event, "`بدون حقوق ادمین نمیتوانید فردی را سکوت کنید` ಥ﹏ಥ  "
                 )
             mute(user.id, event.chat_id)
         except Exception as e:
@@ -452,7 +452,7 @@ async def endmute(event):
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if not is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "`__This user is not muted in this chat__\n（ ^_^）o自自o（^_^ ）`"
+                "`__این کاربر در این چت بی صدا نیست__\n（ ^_^）o自自o（^_^ ）`"
             )
         try:
             unmute(event.chat_id, event.chat_id)
@@ -460,7 +460,7 @@ async def endmute(event):
             await event.edit(f"**Error **\n`{e}`")
         else:
             await event.edit(
-                "`Successfully unmuted that person\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍`"
+                "`با موفقیت آن شخص آزاد شد✅\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍`"
             )
         if BOTLOG:
             await event.client.send_message(
@@ -484,7 +484,7 @@ async def endmute(event):
         except AttributeError:
             return await edit_or_reply(
                 event,
-                "`This user can already speak freely in this chat ~~lmfao sed rip~~`",
+                "`این کاربر در حال حاضر می تواند آزادانه در این چت صحبت کند ~~lmfao sed rip~~`",
             )
         except Exception as e:
             return await edit_or_reply(event, f"**Error : **`{e}`")
@@ -568,7 +568,7 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "`Pinned Successfully!`", 3)
+    await edit_delete(event, "`با موفقیت پین شد📌`", 3)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
