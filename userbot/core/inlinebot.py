@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-CATLOGO = "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
+CATLOGO = "https://telegra.ph/file/790f268ddc9f877bc9788.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -56,7 +56,7 @@ def main_menu():
     text = f"Kalantar Helper\
         \nProvided by {mention}"
     buttons = [
-        (Button.inline("ℹ️ Info", data="check"),),
+        (Button.inline("ℹ️ درباره", data="check"),),
         (
             Button.inline(f"👮‍♂️ ادمین ({len(GRP_INFO['admin'])})", data="admin_menu"),
             Button.inline(f"🤖 بات ({len(GRP_INFO['bot'])})", data="bot_menu"),
