@@ -24,9 +24,9 @@ A simple Telegram userbot based on Telethon .
 ### Self host
   - [check this](https://catuserbot.gitbook.io/catuserbot/tutorial/self-host)
   
-## Support
+## Relationship
    <a href="https://t.me/Cyber_kalantar"><img src="https://img.shields.io/badge/pv%20%3F-yes-green?&style=flat-square?&logo=telegram" width=220px></a></p>
-   <a href="https://t.me/Cyber_kalantar"><img src="https://img.shields.io/badge/pv%20%3F-yes-green?&style=flat-square?&logo=telegram" width=220px></a></p>
+   
    
 ## Inspiration
    - [X-tra-Telegram](https://github.com/Dark-Princ3/X-tra-Telegram)
