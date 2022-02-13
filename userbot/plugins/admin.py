@@ -30,12 +30,12 @@ from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID
 
 # =================== STRINGS ============
-PP_TOO_SMOL = "`The image is too small`"
-PP_ERROR = "`Failure while processing the image`"
-NO_ADMIN = "`I am not an admin nub nibba!`"
-NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play despacito`"
-CHAT_PP_CHANGED = "`Chat Picture Changed`"
-INVALID_MEDIA = "`Invalid Extension`"
+PP_TOO_SMOL = "`تصویر خیلی کوچک است`"
+PP_ERROR = "`هنگام پردازش تصویر شکست خورد`"
+NO_ADMIN = "`من ادمین نیستم`"
+NO_PERM = "`مجوز کافی برای بن کردن ندارید`"
+CHAT_PP_CHANGED = "`عکس چت تغییر کرد`"
+INVALID_MEDIA = "`پسوند نامعتبر است`"
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
