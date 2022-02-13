@@ -31,16 +31,16 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{} warnings, [کاربر](tg://user?id={}) باید بن شود".format(
+            reply = "{}هشدارها, [کاربر](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} warnings, [کاربر](tg://user?id={}) باید بن شود".format(
+            reply = "{} هشدارها, [کاربر](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[کاربر](tg://user?id={}) has {}/{} هشدارها... مراقب باشید!".format(
+        reply = "[کاربر](tg://user?id={}) {}/{} هشداردارد... مراقب باشید!".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
