@@ -165,7 +165,7 @@ async def promote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
         return await catevent.edit(NO_PERM)
-    await catevent.edit("`Promoted Successfully! Now gib Party`")
+    await catevent.edit("`کاربر با موفقیت ادمین شد✅`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -195,7 +195,7 @@ async def demote(event):
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    catevent = await edit_or_reply(event, "`Demoting...`")
+    catevent = await edit_or_reply(event, "`درحال عزل کردن...`")
     newrights = ChatAdminRights(
         add_admins=None,
         invite_users=None,
@@ -209,7 +209,7 @@ async def demote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
         return await catevent.edit(NO_PERM)
-    await catevent.edit("`Demoted Successfully! Betterluck next time`")
+    await catevent.edit("`کاربر با موفقیت عزل شد`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
