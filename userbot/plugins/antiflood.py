@@ -42,14 +42,13 @@ async def _(event):
 
         await asyncio.sleep(4)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude. Stop this, enjoy the chat buddy "
+            "این هرزنامه بی فایده است. این کار را بس کنید، از چت لذت ببرید رفیق "
         )
     else:
         await event.client.send_message(
             entity=event.chat_id,
             message=f"""**Automatic AntiFlooder**
-[User](tg://user?id={event.message.sender_id}) has been automatically restricted
-because he reached the defined flood limit.""",
+[User](tg://user?id={event.message.sender_id}) بطور خودکار محدود شد چون به حد امکان رسید""",
             reply_to=event.message.id,
         )
 
@@ -70,7 +69,7 @@ because he reached the defined flood limit.""",
     require_admin=True,
 )
 async def _(event):
-    "To setup antiflood in a group to prevent spam"
+    "در گروه برای جلوگیری از هرزنامه ها فعال شد"
     input_str = event.pattern_match.group(1)
     event = await edit_or_reply(event, "`updating flood settings!`")
     await asyncio.sleep(2)
