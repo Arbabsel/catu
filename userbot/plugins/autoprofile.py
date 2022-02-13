@@ -393,9 +393,9 @@ async def _(event):
     while not downloader.isFinished():
         pass
     if gvarstatus("digitalpic") is not None and gvarstatus("digitalpic") == "true":
-        return await edit_delete(event, "`Digitalpic is already enabled`")
+        return await edit_delete(event, "`قبلا روی پروفایل اعمال شده`")
     addgvar("digitalpic", True)
-    await edit_delete(event, "`digitalpfp has been started by my Master`")
+    await edit_delete(event, "`با موفقیت روی پروفایل اعمال شد✅`")
     await digitalpicloop()
 
 
@@ -529,9 +529,9 @@ async def useless(event):  # sourcery no-metrics
 async def _(event):
     "To set your display name along with time"
     if gvarstatus("autoname") is not None and gvarstatus("autoname") == "true":
-        return await edit_delete(event, "`Autoname is already enabled`")
+        return await edit_delete(event, "`قبلا روی نام فعال شده`")
     addgvar("autoname", True)
-    await edit_delete(event, "`AutoName has been started by my Master `")
+    await edit_delete(event, "`با موفقیت روی نام اعمال شد✅`")
     await autoname_loop()
 
 
@@ -548,9 +548,9 @@ async def _(event):
 async def _(event):
     "To update your bio along with time"
     if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
-        return await edit_delete(event, "`Autobio is already enabled`")
+        return await edit_delete(event, "`قبلا روی بیوگرافی  فعال شده`")
     addgvar("autobio", True)
-    await edit_delete(event, "`Autobio has been started by my Master `")
+    await edit_delete(event, "`با موفقیت روی بیوگرافی اعمال شد✅`")
     await autobio_loop()
 
 
@@ -619,8 +619,8 @@ async def _(event):  # sourcery no-metrics
                     await event.client.get_profile_photos("me", limit=1)
                 )
             )
-            return await edit_delete(event, "`Digitalpfp has been stopped now`")
-        return await edit_delete(event, "`Digitalpfp haven't enabled`")
+            return await edit_delete(event, "`متوقف شد👌`")
+        return await edit_delete(event, "`درحال حاضر روی پروفایل فعال نیست`")
     if input_str == "bloom":
         if gvarstatus("bloom") is not None and gvarstatus("bloom") == "true":
             delgvar("bloom")
@@ -639,16 +639,16 @@ async def _(event):  # sourcery no-metrics
             await event.client(
                 functions.account.UpdateProfileRequest(first_name=DEFAULTUSER)
             )
-            return await edit_delete(event, "`Autoname has been stopped now`")
-        return await edit_delete(event, "`Autoname haven't enabled`")
+            return await edit_delete(event, "`متوقف شد👌`")
+        return await edit_delete(event, "`درحال حاضر روی نام فعال نیست`")
     if input_str == "autobio":
         if gvarstatus("autobio") is not None and gvarstatus("autobio") == "true":
             delgvar("autobio")
             await event.client(
                 functions.account.UpdateProfileRequest(about=DEFAULTUSERBIO)
             )
-            return await edit_delete(event, "`Autobio has been stopped now`")
-        return await edit_delete(event, "`Autobio haven't enabled`")
+            return await edit_delete(event, "`متوقف شد👌`")
+        return await edit_delete(event, "`درحال حاضر روی بیوگرافی فعال نیست`")
     if input_str == "spam":
         if gvarstatus("spamwork") is not None and gvarstatus("spamwork") == "true":
             delgvar("spamwork")
