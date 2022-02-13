@@ -34,7 +34,7 @@ PP_TOO_SMOL = "`تصویر خیلی کوچک است`"
 PP_ERROR = "`هنگام پردازش تصویر شکست خورد`"
 NO_ADMIN = "`من ادمین نیستم`"
 NO_PERM = "`مجوز کافی برای بن کردن ندارید`"
-CHAT_PP_CHANGED = "`عکس چت تغییر کرد`"
+CHAT_PP_CHANGED = "`عکس چت تغییر کرد✅`"
 INVALID_MEDIA = "`پسوند نامعتبر است`"
 
 BANNED_RIGHTS = ChatBannedRights(
