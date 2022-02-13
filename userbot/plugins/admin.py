@@ -33,7 +33,7 @@ from . import BOTLOG, BOTLOG_CHATID
 PP_TOO_SMOL = "`تصویر خیلی کوچک است`"
 PP_ERROR = "`هنگام پردازش تصویر شکست خورد`"
 NO_ADMIN = "`من ادمین نیستم`"
-NO_PERM = "`مجوز کافی برای بن کردن ندارید`"
+NO_PERM = "`مجوز کافی برای این کارا ندارید`"
 CHAT_PP_CHANGED = "`عکس چت تغییر کرد✅`"
 INVALID_MEDIA = "`پسوند نامعتبر است`"
 
@@ -160,7 +160,7 @@ async def promote(event):
         rank = "Admin"
     if not user:
         return
-    catevent = await edit_or_reply(event, "`Promoting...`")
+    catevent = await edit_or_reply(event, "`درحال ادمین کردن...`")
     try:
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
@@ -521,7 +521,7 @@ async def endmute(event):
     user, reason = await get_user_from_event(event)
     if not user:
         return
-    catevent = await edit_or_reply(event, "`Kicking...`")
+    catevent = await edit_or_reply(event, "`درحال بن کردن...`")
     try:
         await event.client.kick_participant(event.chat_id, user.id)
     except Exception as e:
