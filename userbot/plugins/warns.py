@@ -31,20 +31,20 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{} warnings, [user](tg://user?id={}) has to bee kicked!".format(
+            reply = "{} warnings, [کاربر](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} warnings, [user](tg://user?id={}) has to bee banned!".format(
+            reply = "{} warnings, [کاربر](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[user](tg://user?id={}) has {}/{} warnings... watch out!".format(
+        reply = "[کاربر](tg://user?id={}) has {}/{} هشدارها... مراقب باشید!".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
-            reply += "\nReason for last warn:\n{}".format(html.escape(warn_reason))
+            reply += "\nدلیل آخرین اخطار:\n{}".format(html.escape(warn_reason))
     await edit_or_reply(event, reply)
 
 
@@ -60,21 +60,21 @@ async def _(event):
     "To get users warns list"
     reply_message = await event.get_reply_message()
     if not reply_message:
-        return await edit_delete(event, "__Reply to user to get his warns.__")
+        return await edit_delete(event, "__برای دریافت هشدارهای کاربر به او پاسخ دهید.__")
     result = sql.get_warns(reply_message.sender_id, event.chat_id)
     if not result or result[0] == 0:
-        return await edit_or_reply(event, "this user hasn't got any warnings!")
+        return await edit_or_reply(event, "این کاربر هیچ هشداری دریافت نکرده است!!")
     num_warns, reasons = result
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     if not reasons:
         return await edit_or_reply(
             event,
-            "this user has {} / {} warning, but no reasons for any of them.".format(
+            "این کاربر {} / {} هشدار، اما هیچ دلیلی برای هیچ یک از آنها وجود ندارد.".format(
                 num_warns, limit
             ),
         )
 
-    text = "This user has {}/{} warnings, for the following reasons:".format(
+    text = "این کاربر {}/{} هشدارها، به دلایل زیر:".format(
         num_warns, limit
     )
     text += "\r\n"
@@ -97,4 +97,4 @@ async def _(event):
     "To reset warns"
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.sender_id, event.chat_id)
-    await edit_or_reply(event, "__Warnings have been reset!__")
+    await edit_or_reply(event, "__هشدارها بازنشانی شده است!__")
