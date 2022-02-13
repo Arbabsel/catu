@@ -72,14 +72,14 @@ plugin_category = "admin"
     pattern="gpic( -s| -d)$",
     command=("gpic", plugin_category),
     info={
-        "header": "For changing group display pic or deleting display pic",
+        "header": "برای تغییر عکس نمایشگر گروه یا حذف پی نمایشگر",
         "description": "برای تغییر تصویر نمایش به تصویر ریپلای کنید",
         "flags": {
-            "-s": "To set group pic",
-            "-d": "To delete group pic",
+            "-s": "برای تنظیم عکس گروهی",
+            "-d": "برای حذف عکس گروهی",
         },
         "usage": [
-            "{tr}gpic -s <reply to image>",
+            "{tr}gpic -s <ریپلای به تصویر>",
             "{tr}gpic -d",
         ],
     },
@@ -240,7 +240,7 @@ async def _ban_person(event):
     if not user:
         return
     if user.id == event.client.uid:
-        return await edit_delete(event, "__You cant ban yourself.__")
+        return await edit_delete(event, "__نمیتونی خودتو بن کنی__")
     catevent = await edit_or_reply(event, "`Whacking the pest!`")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, BANNED_RIGHTS))
@@ -256,11 +256,11 @@ async def _ban_person(event):
         )
     if reason:
         await catevent.edit(
-            f"{_format.mentionuser(user.first_name ,user.id)}` is banned !!`\n**Reason : **`{reason}`"
+            f"{_format.mentionuser(user.first_name ,user.id)}` بن شد !!`\n**Reason : **`{reason}`"
         )
     else:
         await catevent.edit(
-            f"{_format.mentionuser(user.first_name ,user.id)} `is banned !!`"
+            f"{_format.mentionuser(user.first_name ,user.id)} `بن شد !!`"
         )
     if BOTLOG:
         if reason:
@@ -300,11 +300,11 @@ async def nothanos(event):
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    catevent = await edit_or_reply(event, "`Unbanning...`")
+    catevent = await edit_or_reply(event, "`لغو بن...`")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
         await catevent.edit(
-            f"{_format.mentionuser(user.first_name ,user.id)} `is Unbanned Successfully. Granting another chance.`"
+            f"{_format.mentionuser(user.first_name ,user.id)} `با موفقیت لغو بن شد . دادن یک فرصتی دیگر`"
         )
         if BOTLOG:
             await event.client.send_message(
@@ -345,16 +345,16 @@ async def watcher(event):
 async def startmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("`Unexpected issues or ugly errors may occur!`")
+        await event.edit("`ممکن است مسائل غیرمنتظره یا خطاهای زشتی رخ دهد!`")
         await sleep(2)
         await event.get_reply_message()
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "`This user is already muted in this chat ~~lmfao sed rip~~`"
+                "`این کاربر قبلاً در این گپ بی صدا شده است`"
             )
         if event.chat_id == catub.uid:
-            return await edit_delete(event, "`You cant mute yourself`")
+            return await edit_delete(event, "`شما نمی توانید خود را بی صدا کنید`")
         try:
             mute(event.chat_id, event.chat_id)
         except Exception as e:
@@ -379,7 +379,7 @@ async def startmute(event):
         if not user:
             return
         if user.id == catub.uid:
-            return await edit_or_reply(event, "`Sorry, I can't mute myself`")
+            return await edit_or_reply(event, "`متاسفم، نمی توانم خودم را بی صدا کنم`")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
                 event, "`این کاربر قبلاً در این گپ بی صدا شده است`"
@@ -414,13 +414,13 @@ async def startmute(event):
         if reason:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n"
+                f"{_format.mentionuser(user.first_name ,user.id)} `این شخص سکوت شد {get_display_name(await event.get_chat())}`\n"
                 f"`Reason:`{reason}",
             )
         else:
             await edit_or_reply(
                 event,
-                f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {get_display_name(await event.get_chat())}`\n",
+                f"{_format.mentionuser(user.first_name ,user.id)} `این شخص سکوت شد {get_display_name(await event.get_chat())}`\n",
             )
         if BOTLOG:
             await event.client.send_message(
@@ -447,7 +447,7 @@ async def startmute(event):
 async def endmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("`Unexpected issues or ugly errors may occur!`")
+        await event.edit("`ممکن است مسائل غیرمنتظره یا خطاهای زشتی رخ دهد!`")
         await sleep(1)
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if not is_muted(event.chat_id, event.chat_id):
@@ -490,7 +490,7 @@ async def endmute(event):
             return await edit_or_reply(event, f"**Error : **`{e}`")
         await edit_or_reply(
             event,
-            f"{_format.mentionuser(user.first_name ,user.id)} `is unmuted in {get_display_name(await event.get_chat())}\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍`",
+            f"{_format.mentionuser(user.first_name ,user.id)} `حذف سکوت شد {get_display_name(await event.get_chat())}\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍`",
         )
         if BOTLOG:
             await event.client.send_message(
@@ -559,7 +559,7 @@ async def pin(event):
     "To pin a message in chat"
     to_pin = event.reply_to_msg_id
     if not to_pin:
-        return await edit_delete(event, "`Reply to a message to pin it.`", 5)
+        return await edit_delete(event, "`برای پین کردن پیام به آن پاسخ دهید.`", 5)
     options = event.pattern_match.group(1)
     is_silent = bool(options)
     try:
@@ -573,7 +573,7 @@ async def pin(event):
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#PIN\
-                \n__successfully pinned a message in chat__\
+                \n__با موفقیت یک پیام را در چت پین کرد📌__\
                 \nCHAT: {get_display_name(await event.get_chat())}(`{event.chat_id}`)\
                 \nLOUD: {is_silent}",
         )
@@ -600,7 +600,7 @@ async def pin(event):
     if not to_unpin and options != "all":
         return await edit_delete(
             event,
-            "__Reply to a message to unpin it or use __`.unpin all`__ to unpin all__",
+            "__برای برداشتن پین یا استفاده به پیامی به آن پاسخ دهید __`.unpin all`__ to unpin all__",
             5,
         )
     try:
@@ -610,18 +610,18 @@ async def pin(event):
             await event.client.unpin_message(event.chat_id)
         else:
             return await edit_delete(
-                event, "`Reply to a message to unpin it or use .unpin all`", 5
+                event, "`برای برداشتن پین یا استفاده به پیامی به آن پاسخ دهید .unpin all`", 5
             )
     except BadRequestError:
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "`Unpinned Successfully!`", 3)
+    await edit_delete(event, "`با موفقیت برداشته شد`", 3)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#UNPIN\
-                \n__successfully unpinned message(s) in chat__\
+                \n__پین پیام های گپ با موفقیت برداشته شد✅__\
                 \nCHAT: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
         )
 
@@ -649,7 +649,7 @@ async def pin(event):
 )
 async def _iundlt(event):  # sourcery no-metrics
     "To check recent deleted messages in group"
-    catevent = await edit_or_reply(event, "`Searching recent actions .....`")
+    catevent = await edit_or_reply(event, "`درحال جستوجو فعالیت های اخیر.....`")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))
@@ -662,7 +662,7 @@ async def _iundlt(event):  # sourcery no-metrics
     adminlog = await event.client.get_admin_log(
         event.chat_id, limit=lim, edit=False, delete=True
     )
-    deleted_msg = f"**Recent {lim} Deleted message(s) in this group are :**"
+    deleted_msg = f"**اخیر {lim} پیام(های) حذف شده در این گروه هستند :**"
     if not flag:
         for msg in adminlog:
             ruser = (
@@ -670,9 +670,9 @@ async def _iundlt(event):  # sourcery no-metrics
             ).user
             _media_type = media_type(msg.old)
             if _media_type is None:
-                deleted_msg += f"\n☞ __{msg.old.message}__ **Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n☞ __{msg.old.message}__ **ارسال شده توسط** {_format.mentionuser(ruser.first_name ,ruser.id)}"
             else:
-                deleted_msg += f"\n☞ __{_media_type}__ **Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n☞ __{_media_type}__ **ارسال شده توسط** {_format.mentionuser(ruser.first_name ,ruser.id)}"
         await edit_or_reply(catevent, deleted_msg)
     else:
         main_msg = await edit_or_reply(catevent, deleted_msg)
@@ -683,10 +683,10 @@ async def _iundlt(event):  # sourcery no-metrics
             _media_type = media_type(msg.old)
             if _media_type is None:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                    f"{msg.old.message}\n**ارسال شده توسط** {_format.mentionuser(ruser.first_name ,ruser.id)}"
                 )
             else:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Sent by** {_format.mentionuser(ruser.first_name ,ruser.id)}",
+                    f"{msg.old.message}\n**ارسال شده توسط** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
