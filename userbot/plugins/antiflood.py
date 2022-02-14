@@ -42,14 +42,13 @@ async def _(event):
 
         await asyncio.sleep(4)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude. Stop this, enjoy the chat buddy "
+            "این اسپم بی فایده است. این کار را بس کنید، از چت لذت ببرید رفیق"
         )
     else:
         await event.client.send_message(
             entity=event.chat_id,
             message=f"""**Automatic AntiFlooder**
-[User](tg://user?id={event.message.sender_id}) has been automatically restricted
-because he reached the defined flood limit.""",
+[User](tg://user?id={event.message.sender_id}) به طور خودکار محدود شده است چون به حد تعیین شده رسیده است.""",
             reply_to=event.message.id,
         )
 
@@ -72,11 +71,11 @@ because he reached the defined flood limit.""",
 async def _(event):
     "To setup antiflood in a group to prevent spam"
     input_str = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`updating flood settings!`")
+    event = await edit_or_reply(event, "`به روزرسانی تنظیمات...`")
     await asyncio.sleep(2)
     try:
         sql.set_flood(event.chat_id, input_str)
         sql.__load_flood_settings()
-        await event.edit(f"Antiflood updated to {input_str} in the current chat")
+        await event.edit(f"به روزرسانی شد {input_str} در چت فعلی")
     except Exception as e:
         await event.edit(str(e))
