@@ -103,7 +103,7 @@ async def noods(event):
             await edit_or_reply(catevent, "`بیش از حداکثر محدودیت خطای جستجو..`")
     try:
         await edit_or_reply(catevent, "`درحال ارسال...`")
-        captionlist[-1] = f"**➥ Query :-** `{query.title()}`"
+        captionlist[-1] = f"**➥ جستوجو :-** `{query.title()}`"
         await event.client.send_file(
             event.chat_id,
             piclist,
