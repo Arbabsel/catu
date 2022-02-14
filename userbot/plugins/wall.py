@@ -47,12 +47,12 @@ async def noods(event):
     reply_to_id = await reply_id(event)
     limit = 1
     if not query:
-        return await edit_delete(event, "`what should i search`", 10)
+        return await edit_delete(event, "`چه چیزی را باید جستجو کنم`", 10)
     if ";" in query:
         query, limit = query.split(";")
     if int(limit) > 10:
-        return await edit_delete(event, "`Wallpaper search limit is 1-10`", 10)
-    catevent = await edit_or_reply(event, "🔍 `Searching...`")
+        return await edit_delete(event, "`محدودیت جستوجو والپیپر بین 1-10`", 10)
+    catevent = await edit_or_reply(event, "🔍 `درحال جستوجو...`")
     r = requests.get(
         f"https://wall.alphacoders.com/search.php?search={query.replace(' ','+')}"
     )
@@ -60,13 +60,13 @@ async def noods(event):
     walls = soup.find_all("img", class_="img-responsive")
     if not walls:
         return await edit_delete(
-            catevent, f"**Can't find anything with** `{query}`", 10
+            catevent, f"**چیزی با آن پیدا نمی شود** `{query}`", 10
         )
     i = count = 0
     piclist = []
     piclinks = []
     captionlist = []
-    await edit_or_reply(catevent, "⏳ `Processing..`")
+    await edit_or_reply(catevent, "⏳ `درحال پردازش...`")
     url2 = "https://api.alphacoders.com/content/get-download-link"
     for x in walls:
         wall = random.choice(walls)["src"][8:-4]
@@ -81,11 +81,11 @@ async def noods(event):
         res = requests.post(url2, data=data)
         a = res.json()["link"]
         if "We are sorry," not in requests.get(a).text and a not in piclinks:
-            await edit_or_reply(catevent, "📥** Downloading...**")
+            await edit_or_reply(catevent, "📥**درحال دانلود...**")
             pic = await wall_download(a, query)
             if pic is None:
                 return await edit_delete(
-                    catevent, "__Sorry i can't download wallpaper.__"
+                    catevent, "__متاسفم که نمی توانم والپیپر را دانلود کنم.__"
                 )
             piclist.append(pic)
             piclinks.append(a)
@@ -95,14 +95,14 @@ async def noods(event):
         else:
             i += 1
         await edit_or_reply(
-            catevent, f"**📥 Downloaded : {count}/{limit}\n\n❌ Errors : {i}/5**"
+            catevent, f"**📥 دانلود شد : {count}/{limit}\n\n❌ Errors : {i}/5**"
         )
         if count == int(limit):
             break
         if i == 5:
-            await edit_or_reply(catevent, "`Max search error limit exceed..`")
+            await edit_or_reply(catevent, "`بیش از حداکثر محدودیت خطای جستجو..`")
     try:
-        await edit_or_reply(catevent, "`Sending...`")
+        await edit_or_reply(catevent, "`درحال ارسال...`")
         captionlist[-1] = f"**➥ Query :-** `{query.title()}`"
         await event.client.send_file(
             event.chat_id,
