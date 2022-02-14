@@ -27,18 +27,18 @@ async def catbot(event):
     replied = await event.get_reply_message()
     catid = await reply_id(event)
     if not replied:
-        return await edit_or_reply(event, "reply to a supported media file")
+        return await edit_or_reply(event, "به یک فایل رسانه ای پشتیبانی شده پاسخ دهید")
     output = await _cattools.media_to_pic(event, replied)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "__نمی توان تصویر را از پیام پاسخ داده شده استخراج کرد.__"
         )
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     if size > 5242880:
         os.remove(download_location)
         return await output[0].edit(
-            "the replied file size is not supported it must me below 5 mb"
+            "اندازه فایل پاسخ داده شده پشتیبانی نمی شود، باید کمتر از 5 مگابایت باشد"
         )
     await event.reply(file=download_location)
     await output[0].edit("generating image..")
@@ -67,18 +67,18 @@ async def catbot(event):
     replied = await event.get_reply_message()
     catid = await reply_id(event)
     if not replied:
-        return await edit_or_reply(event, "reply to a supported media file")
+        return await edit_or_reply(event, "به یک فایل رسانه ای پشتیبانی شده پاسخ دهید")
     output = await _cattools.media_to_pic(event, replied)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "__نمی توان تصویر را از پیام پاسخ داده شده استخراج کرد.__"
         )
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     if size > 5242880:
         os.remove(download_location)
         return await output[0].edit(
-            "the replied file size is not supported it must me below 5 mb"
+            "اندازه فایل پاسخ داده شده پشتیبانی نمی شود، باید کمتر از 5 مگابایت باشد"
         )
     await output[0].edit("generating image..")
     try:
@@ -111,23 +111,23 @@ async def catbot(event):
     else:
         return await edit_or_reply(
             event,
-            "**Syntax :** reply to image or sticker with `.trap (name of the person to trap);(trapper name)`",
+            "**Syntax :** پاسخ به تصویر یا برچسب `.trap (name of the person to trap);(trapper name)`",
         )
     replied = await event.get_reply_message()
     catid = await reply_id(event)
     if not replied:
-        return await edit_or_reply(event, "reply to a supported media file")
+        return await edit_or_reply(event, "به یک فایل رسانه ای پشتیبانی شده پاسخ دهید")
     output = await _cattools.media_to_pic(event, replied)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "__نمی توان تصویر را از پیام پاسخ داده شده استخراج کرد.__"
         )
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     if size > 5242880:
         os.remove(download_location)
         return await output[0].edit(
-            "the replied file size is not supported it must me below 5 mb"
+            "اندازه فایل پاسخ داده شده پشتیبانی نمی شود، باید کمتر از 5 مگابایت باشد"
         )
     await output[0].edit("generating image..")
     try:
@@ -165,21 +165,21 @@ async def catbot(event):
     replied = await event.get_reply_message()
     catid = await reply_id(event)
     if not replied:
-        return await edit_or_reply(event, "reply to a supported media file")
+        return await edit_or_reply(event, "به یک فایل رسانه ای پشتیبانی شده پاسخ دهید")
     output = await _cattools.media_to_pic(event, replied)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "__نمی توان تصویر را از پیام پاسخ داده شده استخراج کرد.__"
         )
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     if size > 5242880:
         os.remove(download_location)
         return await output[0].edit(
-            "the replied file size is not supported it must me below 5 mb"
+            "اندازه فایل پاسخ داده شده پشتیبانی نمی شود، باید کمتر از 5 مگابایت باشد"
         )
 
-    await output[0].edit("generating image..")
+    await output[0].edit("درحال تولید تصویر...")
     try:
         response = upload_file(download_location)
     except exceptions.TelegraphException as exc:
