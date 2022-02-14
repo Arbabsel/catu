@@ -25,21 +25,21 @@ async def _(event):
         input_str = reply.text
     if not input_str:
         return await edit_delete(
-            event, "`Either reply to link or give link as input to get data`", 5
+            event, "`برای دریافت داده یا به پیوند پاسخ دهید یا پیوند را به عنوان ورودی بدهید`", 5
         )
     check = url(input_str)
     if not check:
         catstr = "http://" + input_str
         check = url(catstr)
     if not check:
-        return await edit_delete(event, "`the given link is not supported`", 5)
+        return await edit_delete(event, "`لینک داده شده پشتیبانی نمی شود❌`", 5)
     sample_url = f"https://da.gd/dns/{input_str}"
     response_api = requests.get(sample_url).text
     if response_api:
         await edit_or_reply(event, f"DNS records of {input_str} are \n{response_api}")
     else:
         await edit_or_reply(
-            event, f"__I can't seem to find `{input_str}` on the internet__"
+            event, f"__به نظر نمی رسد پیدا کنم`{input_str}` در اینترنت__"
         )
 
 
@@ -60,14 +60,14 @@ async def _(event):
         input_str = reply.text
     if not input_str:
         return await edit_delete(
-            event, "`Either reply to link or give link as input to get data`", 5
+            event, "`برای دریافت داده یا به پیوند پاسخ دهید یا پیوند را به عنوان ورودی بدهید`", 5
         )
     check = url(input_str)
     if not check:
         catstr = f"http://" + input_str
         check = url(catstr)
     if not check:
-        return await edit_delete(event, "`the given link is not supported`", 5)
+        return await edit_delete(event, "`لینک داده شده پشتیبانی نمی شود❌`", 5)
     if not input_str.startswith("http"):
         input_str = "http://" + input_str
     sample_url = f"https://da.gd/s?url={input_str}"
@@ -77,7 +77,7 @@ async def _(event):
             event, f"Generated {response_api} for {input_str}.", link_preview=False
         )
     else:
-        await edit_or_reply(event, "`Something is wrong, please try again later.`")
+        await edit_or_reply(event, "`مشکلی وجود دارد، لطفاً بعداً دوباره امتحان کنید.❗`")
 
 
 @catub.cat_cmd(
@@ -97,14 +97,14 @@ async def _(event):
         input_str = reply.text
     if not input_str:
         return await edit_delete(
-            event, "`Either reply to link or give link as input to get data`", 5
+            event, "`برای دریافت داده یا به پیوند پاسخ دهید یا پیوند را به عنوان ورودی بدهید`", 5
         )
     check = url(input_str)
     if not check:
         catstr = "http://" + input_str
         check = url(catstr)
     if not check:
-        return await edit_delete(event, "`the given link is not supported`", 5)
+        return await edit_delete(event, "`لینک داده شده پشتیبانی نمی شود❌`", 5)
     if not input_str.startswith("http"):
         input_str = "http://" + input_str
     r = requests.get(input_str, allow_redirects=False)
@@ -139,12 +139,12 @@ async def _(event):
         input_str = reply.text
     if not input_str:
         return await edit_delete(
-            event, "`Either reply to link or give link as input to get data`", 5
+            event, "`برای دریافت داده یا به پیوند پاسخ دهید یا پیوند را به عنوان ورودی بدهید`", 5
         )
     check = url(input_str)
     if not check:
         catstr = "http://" + input_str
         check = url(catstr)
     if not check:
-        return await edit_delete(event, "`the given link is not supported`", 5)
+        return await edit_delete(event, "`لینک داده شده پشتیبانی نمی شود❌`", 5)
     await edit_or_reply(event, "[ㅤㅤㅤㅤㅤㅤㅤ](" + input_str + ")")
