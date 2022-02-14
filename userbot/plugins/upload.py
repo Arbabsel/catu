@@ -107,7 +107,7 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
         uploaded = await event.client.fast_upload_file(
             file=ul,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, event, c_time, "trying to upload", file_name=fname)
+                progress(d, t, event, c_time, "تلاش برای آپلود", file_name=fname)
             ),
         )
         ul.close()
@@ -151,7 +151,7 @@ async def uploadir(event):
     if not os.path.exists(path):
         return await edit_or_reply(
             event,
-            f"`there is no such directory/file with the name {path} to upload`",
+            f"`چنین دایرکتوری وجود ندارد/file with the name {path} to upload`",
         )
     udir_event = await edit_or_reply(event, "Uploading....")
     if os.path.isdir(path):
