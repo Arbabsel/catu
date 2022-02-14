@@ -47,7 +47,7 @@ async def _(event):
     else:
         await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
+            message=f"""**ضد اسپم🔰**
 [User](tg://user?id={event.message.sender_id}) به طور خودکار محدود شده است چون به حد تعیین شده رسیده است.""",
             reply_to=event.message.id,
         )
@@ -76,6 +76,6 @@ async def _(event):
     try:
         sql.set_flood(event.chat_id, input_str)
         sql.__load_flood_settings()
-        await event.edit(f"به روزرسانی شد {input_str} در چت فعلی")
+        await event.edit(f"ضد اسپم به روزرسانی شد {input_str} در چت فعلی")
     except Exception as e:
         await event.edit(str(e))
