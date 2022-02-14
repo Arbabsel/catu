@@ -36,7 +36,7 @@ async def _(event):
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} warnings, [user](tg://user?id={}) باید بن شود".format(
+            reply = "{} هشدار, [user](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
     else:
