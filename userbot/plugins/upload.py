@@ -151,26 +151,26 @@ async def uploadir(event):
     if not os.path.exists(path):
         return await edit_or_reply(
             event,
-            f"`چنین دایرکتوری وجود ندارد/file with the name {path} to upload`",
+            f"`چنین دایرکتوری وجود ندارد/فایل با نام {path} برای آپلود`",
         )
-    udir_event = await edit_or_reply(event, "Uploading....")
+    udir_event = await edit_or_reply(event, "⏳درحال آپلود...")
     if os.path.isdir(path):
-        await edit_or_reply(udir_event, f"`Gathering file details in directory {path}`")
+        await edit_or_reply(udir_event, f"`جمع آوری جزئیات فایل در دایرکتوری {path}`")
         UPLOAD_.uploaded = 0
         await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(
             udir_event,
-            f"`Uploaded {UPLOAD_.uploaded} files successfully in {ms} seconds. `",
+            f"`آپلود شد {UPLOAD_.uploaded} فایل ها با موفقیت در {ms} ثانیه. `",
         )
     else:
-        await edit_or_reply(udir_event, "`Uploading file .....`")
+        await edit_or_reply(udir_event, "`درحال آپلود فایل.....`")
         UPLOAD_.uploaded = 0
         await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(
             udir_event,
-            f"`Uploaded file {path} successfully in {ms} seconds. `",
+            f"`فایل آپلود شده {path} با موفقیت در {ms} ثانیه `",
         )
