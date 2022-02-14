@@ -97,4 +97,4 @@ async def _(event):
     "To reset warns"
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.sender_id, event.chat_id)
-    await edit_or_reply(event, "__Warnings have been reset!__")
+    await edit_or_reply(event, "__هشدارها بازنشانی شده است!__")
