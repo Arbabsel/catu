@@ -42,10 +42,10 @@ async def _(event):
         lan = input_str or "en"
     else:
         if not input_str:
-            return await edit_or_reply(event, "Invalid Syntax. Module stopping.")
+            return await edit_or_reply(event, "عبارت نادرست. دستور متوقف شد❌")
         text = input_str
         lan = "en"
-    catevent = await edit_or_reply(event, "`Recording......`")
+    catevent = await edit_or_reply(event, "`درحال ضبط.....`")
     text = deEmojify(text.strip())
     lan = lan.strip()
     if not os.path.isdir("./temp/"):
@@ -91,7 +91,7 @@ async def _(event):
         os.remove(required_file_name)
         await edit_delete(
             catevent,
-            "`Processed text {} into voice in {} seconds!`".format(text[0:20], ms),
+            "`متن پردازش شده {} به صدا در {} ثانیه`".format(text[0:20], ms),
         )
     except Exception as e:
         await edit_or_reply(catevent, f"**Error:**\n`{e}`")
