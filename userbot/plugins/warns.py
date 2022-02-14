@@ -31,20 +31,20 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{}هشدار, [کاربر](tg://user?id={}) باید بن شود".format(
+            reply = "{} هشدار, [user](tg://user?id={}) این کاربر باید بن شود".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} هشدار, [کاربر](tg://user?id={}) باید بن شود".format(
+            reply = "{} warnings, [user](tg://user?id={}) باید بن شود".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[کاربر](tg://user?id={}) {}/{} هشداردارد... مراقب باشید!".format(
+        reply = "[user](tg://user?id={}) دارد {}/{} هشدار... مراقب باشید!".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
-            reply += "\nدلیل آخرین اخطار:\n{}".format(html.escape(warn_reason))
+            reply += "\nدلیل آخرین هشدار:\n{}".format(html.escape(warn_reason))
     await edit_or_reply(event, reply)
 
 
@@ -63,7 +63,7 @@ async def _(event):
         return await edit_delete(event, "__برای دریافت هشدارهای کاربر به او پاسخ دهید.__")
     result = sql.get_warns(reply_message.sender_id, event.chat_id)
     if not result or result[0] == 0:
-        return await edit_or_reply(event, "این کاربر هیچ هشداری دریافت نکرده است!!")
+        return await edit_or_reply(event, "این کاربر هیچ هشداری دریافت نکرده است!")
     num_warns, reasons = result
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     if not reasons:
@@ -86,7 +86,7 @@ async def _(event):
     pattern="r(eset)?warns$",
     command=("resetwarns", plugin_category),
     info={
-        "header": "To reset warns of the replied user",
+        "header": "برای بازنشانی به کاربر پاسخ داده هشدار می دهد",
         "usage": [
             "{tr}rwarns",
             "{tr}resetwarns",
@@ -97,4 +97,4 @@ async def _(event):
     "To reset warns"
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.sender_id, event.chat_id)
-    await edit_or_reply(event, "__هشدارها بازنشانی شده است!__")
+    await edit_or_reply(event, "__Warnings have been reset!__")
