@@ -61,20 +61,20 @@ async def get_user_from_event(
             previous_message = await event.get_reply_message()
             if previous_message.from_id is None:
                 if not noedits:
-                    await edit_delete(catevent, "`Well that's an anonymous admin !`")
+                    await edit_delete(catevent, "`خب این یک مدیر ناشناس است!`")
                 return None, None
             user_obj = await event.client.get_entity(previous_message.sender_id)
             return user_obj, extra
         if not args:
             if not noedits:
                 await edit_delete(
-                    catevent, "`Pass the user's username, id or reply!`", 5
+                    catevent, "`نام کاربری، شناسه یا پاسخ کاربر را ارسال کنید!`", 5
                 )
             return None, None
     except Exception as e:
         LOGS.error(str(e))
     if not noedits:
-        await edit_delete(catevent, "__Couldn't fetch user to proceed further.__")
+        await edit_delete(catevent, "__خطا: برای این کار باید گزینه یوزر بن شما در گروه فعال باشد__")
     return None, None
 
 
