@@ -53,8 +53,8 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"Kalantar Helper\
-        \nProvided by {mention}"
+    text = f"**Kalantar Helper**\
+        \n**Provided by** {mention}"
     buttons = [
         (Button.inline("ℹ️ درباره", data="check"),),
         (
@@ -62,7 +62,7 @@ def main_menu():
             Button.inline(f"🤖 بات ({len(GRP_INFO['bot'])})", data="bot_menu"),
         ),
         (
-            Button.inline(f"🎨 خنده ({len(GRP_INFO['fun'])})", data="fun_menu"),
+            Button.inline(f"🎨 باحال ({len(GRP_INFO['fun'])})", data="fun_menu"),
             Button.inline(f"🧩 متفرقه ({len(GRP_INFO['misc'])})", data="misc_menu"),
         ),
         (
@@ -569,7 +569,7 @@ async def inline_handler(event):  # sourcery no-metrics
             url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "Deploy your own Kalantarbot.", "md"
+            "**Deploy your own Kalantarbot.**", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
