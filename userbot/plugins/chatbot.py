@@ -43,7 +43,7 @@ tired_response = [
     pattern="addai$",
     command=("addai", plugin_category),
     info={
-        "header": "To add ai chatbot to replied account.",
+        "header": "به کاربر پاسخ دهید تا انمی فعال شود",
         "usage": "{tr}addai <reply>",
     },
 )
@@ -51,9 +51,9 @@ async def add_chatbot(event):
     "To enable ai for the replied person"
     if event.reply_to_msg_id is None:
         return await edit_or_reply(
-            event, "`Reply to a User's message to activate ai on `"
+            event, "`به کاربر پاسخ دهید تا انمی فعال شود`"
         )
-    catevent = await edit_or_reply(event, "`Adding ai to user...`")
+    catevent = await edit_or_reply(event, "`درحال افزودن انمی...`")
     user, rank = await get_user_from_event(event, catevent, nogroup=True)
     if not user:
         return
@@ -69,7 +69,7 @@ async def add_chatbot(event):
     user_name = user.first_name
     user_username = user.username
     if is_added(chat_id, user_id):
-        return await edit_or_reply(event, "`The user is already enabled with ai.`")
+        return await edit_or_reply(event, "`قبلا برای کاربر انمی فعال شده است`")
     try:
         addai(chat_id, user_id, chat_name, user_name, user_username, chat_type)
     except Exception as e:
@@ -90,7 +90,7 @@ async def remove_chatbot(event):
     "To stop ai for that user"
     if event.reply_to_msg_id is None:
         return await edit_or_reply(
-            event, "Reply to a User's message to stop ai on him."
+            event, "به پیام یک کاربر پاسخ دهید تا انمی متوقف شود"
         )
     reply_msg = await event.get_reply_message()
     user_id = reply_msg.sender_id
@@ -101,9 +101,9 @@ async def remove_chatbot(event):
         except Exception as e:
             await edit_delete(catevent, f"**Error:**\n`{e}`")
         else:
-            await edit_or_reply(event, "Ai has been stopped for the user")
+            await edit_or_reply(event, "انمی برای کاربر متوقف شد")
     else:
-        await edit_or_reply(event, "The user is not activated with ai")
+        await edit_or_reply(event, "برای کاربر انمی فعال نمیشود")
 
 
 @catub.cat_cmd(
@@ -126,26 +126,26 @@ async def delete_chatbot(event):
         lecho = get_all_users()
         if len(lecho) == 0:
             return await edit_delete(
-                event, "You havent enabled ai atleast for one user in any chat."
+                event, "انمی برای کاربران در هیچ چتی فعال نکرده اید"
             )
         try:
             remove_all_users()
         except Exception as e:
             await edit_delete(event, f"**Error:**\n`{str(e)}`", 10)
         else:
-            await edit_or_reply(event, "Deleted ai for all enabled users in all chats.")
+            await edit_or_reply(event, "انمی برای همه کاربران فعال در همه چت ها حذف شد")
     else:
         lecho = get_users(event.chat_id)
         if len(lecho) == 0:
             return await edit_delete(
-                event, "You havent enabled ai atleast for one user in this chat."
+                event, "شما انمی را برای یک کاربر در این چت فعال نکرده اید"
             )
         try:
             remove_users(event.chat_id)
         except Exception as e:
             await edit_delete(event, f"**Error:**\n`{e}`", 10)
         else:
-            await edit_or_reply(event, "Deleted ai for all enabled users in this chat")
+            await edit_or_reply(event, "انمی برای همه کاربران در همه چت ها حذف شد")
 
 
 @catub.cat_cmd(
@@ -166,12 +166,12 @@ async def list_chatbot(event):  # sourcery no-metrics
     "To list all users on who you enabled ai."
     input_str = event.pattern_match.group(1)
     private_chats = ""
-    output_str = "**Ai enabled users:**\n\n"
+    output_str = "**انمی فعال برای کاربران در این چت:**\n\n"
     if input_str:
         lsts = get_all_users()
         group_chats = ""
         if len(lsts) <= 0:
-            return await edit_or_reply(event, "There are no ai enabled users")
+            return await edit_or_reply(event, "انمی برای هیچ کاربری وجود ندارد")
         for echos in lsts:
             if echos.chat_type == "Personal":
                 if echos.user_username:
@@ -183,9 +183,9 @@ async def list_chatbot(event):  # sourcery no-metrics
                         f"☞ [{echos.user_name}](tg://user?id={echos.user_id})\n"
                     )
             elif echos.user_username:
-                group_chats += f"☞ [{echos.user_name}](https://t.me/{echos.user_username}) in chat {echos.chat_name} of chat id `{echos.chat_id}`\n"
+                group_chats += f"☞ [{echos.user_name}](https://t.me/{echos.user_username}) در چت {echos.chat_name} شناسه چت `{echos.chat_id}`\n"
             else:
-                group_chats += f"☞ [{echos.user_name}](tg://user?id={echos.user_id}) in chat {echos.chat_name} of chat id `{echos.chat_id}`\n"
+                group_chats += f"☞ [{echos.user_name}](tg://user?id={echos.user_id}) در چت {echos.chat_name} شناسه چت `{echos.chat_id}`\n"
 
         if private_chats != "":
             output_str += "**Private Chats**\n" + private_chats + "\n\n"
@@ -195,7 +195,7 @@ async def list_chatbot(event):  # sourcery no-metrics
         lsts = get_users(event.chat_id)
         if len(lsts) <= 0:
             return await edit_or_reply(
-                event, "There are no ai enabled users in this chat"
+                event, "انمی برای هیچ کاربری وجود ندارد"
             )
         for echos in lsts:
             if echos.user_username:
@@ -206,7 +206,7 @@ async def list_chatbot(event):  # sourcery no-metrics
                 private_chats += (
                     f"☞ [{echos.user_name}](tg://user?id={echos.user_id})\n"
                 )
-        output_str = "**Ai enabled users in this chat are:**\n" + private_chats
+        output_str = "**انمی فعال برای کاربران در این چت:**\n" + private_chats
     await edit_or_reply(event, output_str)
 
 
