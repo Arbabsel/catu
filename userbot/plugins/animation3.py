@@ -106,7 +106,7 @@ async def _(event):
     try:
         obj = event.pattern_match.group(1)
         if len(obj) != 3:
-            return await edit_delete(event, "`Input length must be 3 or empty`")
+            return await edit_delete(event, "`طول ورودی باید 3 ایموجی باشد`")
         inp = " ".join(obj)
     except IndexError:
         inp = "🥞 🎂 🍫"
@@ -217,7 +217,7 @@ async def _(event):
         "🤯",
         "💔",
         "❤",
-        "I Love You❤",
+        "دوست دارم❤",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
@@ -234,7 +234,21 @@ async def _(event):
 )
 async def _(event):
     "animation command"
-    event = await edit_or_reply(event, "Wait for plane...")
+    event = await edit_or_reply(event, "منتظر هواپیما باشید...")
+    await event.edit("✈-------------")
+    await event.edit("-✈------------")
+    await event.edit("--✈-----------")
+    await event.edit("---✈----------")
+    await event.edit("----✈---------")
+    await event.edit("-----✈--------")
+    await event.edit("------✈-------")
+    await event.edit("-------✈------")
+    await event.edit("--------✈-----")
+    await event.edit("---------✈----")
+    await event.edit("----------✈---")
+    await event.edit("-----------✈--")
+    await event.edit("------------✈-")
+    await event.edit("-------------✈")
     await event.edit("✈-------------")
     await event.edit("-✈------------")
     await event.edit("--✈-----------")
@@ -277,7 +291,7 @@ async def _(event):
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
         "🔵🔵🔵⬜⬜⬜🔴🔴🔴\n🔵🔵🔵⬜⬜⬜🔴🔴🔴\n🔵🔵🔵⬜⬜⬜🔴🔴🔴",
         "🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵\n🔴🔴🔴⬜⬜⬜🔵🔵🔵",
-        f"{mention} **Police iz Here**",
+        f"{mention} **کلانتراینجاست👮🏼‍♂️**",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)
