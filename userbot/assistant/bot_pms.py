@@ -103,7 +103,7 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention}"👀"\
+            start_msg = f"Hey! 👤{mention},\
                         \nI am {my_mention}'s assistant bot of Manas.\
                         \nYou can contact to my Master from here 🤖\
                         \n\nDeveloped by [Manas]🙂"
