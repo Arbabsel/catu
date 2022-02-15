@@ -38,7 +38,7 @@ from . import (
 )
 
 plugin_category = "tools"
-DEFAULTUSERBIO = DEFAULT_BIO or "ساعت فضولی"
+DEFAULTUSERBIO = DEFAULT_BIO or "ســا'عــتـــ فــضــلــیــ"
 DEFAULTUSER = AUTONAME or Config.ALIVE_NAME
 LOGS = logging.getLogger(__name__)
 
