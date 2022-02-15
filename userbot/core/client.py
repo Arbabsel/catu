@@ -105,11 +105,11 @@ class CatUserBotClient(TelegramClient):
             async def wrapper(check):  # sourcery no-metrics
                 if groups_only and not check.is_group:
                     return await edit_delete(
-                        check, "`I don't think this is a group.`", 10
+                        check, "`من فکر نمی کنم این یک گروه باشد.`", 10
                     )
                 if private_only and not check.is_private:
                     return await edit_delete(
-                        check, "`I don't think this is a personal Chat.`", 10
+                        check, "`من فکر نمی کنم این یک چت شخصی باشد.`", 10
                     )
                 try:
                     await func(check)
@@ -118,30 +118,30 @@ class CatUserBotClient(TelegramClient):
                 except KeyboardInterrupt:
                     pass
                 except MessageNotModifiedError:
-                    LOGS.error("Message was same as previous message")
+                    LOGS.error("پیام مانند پیام قبلی بود")
                 except MessageIdInvalidError:
-                    LOGS.error("Message was deleted or cant be found")
+                    LOGS.error("پیام حذف شد یا یافت نشد")
                 except BotInlineDisabledError:
-                    await edit_delete(check, "`Turn on Inline mode for our bot`", 10)
+                    await edit_delete(check, "`حالت درون خطی را برای ربات روشن کنید`", 10)
                 except ChatSendStickersForbiddenError:
                     await edit_delete(
-                        check, "`I guess i can't send stickers in this chat`", 10
+                        check, "`حدس می‌زنم نمی‌توانم در این چت استیکر بفرستم`", 10
                     )
                 except BotResponseTimeoutError:
                     await edit_delete(
-                        check, "`The bot didnt answer to your query in time`", 10
+                        check, "`ربات به موقع به درخواست شما پاسخ نداد`", 10
                     )
                 except ChatSendMediaForbiddenError:
-                    await edit_delete(check, "`You can't send media in this chat`", 10)
+                    await edit_delete(check, "`در این چت نمی توانید رسانه ارسال کنید`", 10)
                 except AlreadyInConversationError:
                     await edit_delete(
                         check,
-                        "`A conversation is already happening with the given chat. try again after some time.`",
+                        "`یک مکالمه از قبل با چت داده شده در حال انجام است. بعد از مدتی دوباره امتحان کنید`",
                         10,
                     )
                 except ChatSendInlineForbiddenError:
                     await edit_delete(
-                        check, "`You can't send inline messages in this chat.`", 10
+                        check, "`در این چت نمی توانید پیام های درون خطی ارسال کنید.`", 10
                     )
                 except FloodWaitError as e:
                     LOGS.error(
