@@ -133,7 +133,7 @@ async def delete_chatbot(event):
         except Exception as e:
             await edit_delete(event, f"**Error:**\n`{str(e)}`", 10)
         else:
-            await edit_or_reply(event, "انمی برای همه کاربران فعال در همه چت ها حذف شد")
+            await edit_or_reply(event, "انمی برای کاربر حذف و متوقف شد")
     else:
         lecho = get_users(event.chat_id)
         if len(lecho) == 0:
@@ -145,7 +145,7 @@ async def delete_chatbot(event):
         except Exception as e:
             await edit_delete(event, f"**Error:**\n`{e}`", 10)
         else:
-            await edit_or_reply(event, "انمی برای همه کاربران در همه چت ها حذف شد")
+            await edit_or_reply(event, "انمی برای کاربر حذف و متوقف شد")
 
 
 @catub.cat_cmd(
@@ -171,7 +171,7 @@ async def list_chatbot(event):  # sourcery no-metrics
         lsts = get_all_users()
         group_chats = ""
         if len(lsts) <= 0:
-            return await edit_or_reply(event, "انمی برای هیچ کاربری وجود ندارد")
+            return await edit_or_reply(event, "انمی فعال برای هیچ کاربری وجود ندارد")
         for echos in lsts:
             if echos.chat_type == "Personal":
                 if echos.user_username:
@@ -188,14 +188,14 @@ async def list_chatbot(event):  # sourcery no-metrics
                 group_chats += f"☞ [{echos.user_name}](tg://user?id={echos.user_id}) در چت {echos.chat_name} شناسه چت `{echos.chat_id}`\n"
 
         if private_chats != "":
-            output_str += "**Private Chats**\n" + private_chats + "\n\n"
+            output_str += "**چت های خصوصی**\n" + private_chats + "\n\n"
         if group_chats != "":
-            output_str += "**Group Chats**\n" + group_chats
+            output_str += "**چت های گروهی**\n" + group_chats
     else:
         lsts = get_users(event.chat_id)
         if len(lsts) <= 0:
             return await edit_or_reply(
-                event, "انمی برای هیچ کاربری وجود ندارد"
+                event, "انمی فعال برای هیچ کاربری وجود ندارد"
             )
         for echos in lsts:
             if echos.user_username:
