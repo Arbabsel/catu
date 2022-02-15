@@ -31,16 +31,16 @@ async def _(event):
         sql.reset_warns(reply_message.sender_id, event.chat_id)
         if soft_warn:
             logger.info("TODO: kick user")
-            reply = "{} هشدار, [user](tg://user?id={}) باید این کاربر بن شود".format(
+            reply = "{} هشدار, [کاربر](tg://user?id={}) باید این کاربر بن شود".format(
                 limit, reply_message.sender_id
             )
         else:
             logger.info("TODO: ban user")
-            reply = "{} هشدار, [user](tg://user?id={}) باید این کاربر بن شود".format(
+            reply = "{} هشدار, [کاربر](tg://user?id={}) باید این کاربر بن شود".format(
                 limit, reply_message.sender_id
             )
     else:
-        reply = "[user](tg://user?id={}) دارد {}/{} هشدار... مراقب باشید!".format(
+        reply = "[کاربر](tg://user?id={}) از {}/{} هشدار دارد... مراقب باشید!".format(
             reply_message.sender_id, num_warns, limit
         )
         if warn_reason:
@@ -69,12 +69,12 @@ async def _(event):
     if not reasons:
         return await edit_or_reply(
             event,
-            "این کاربر دارد {} / {} هشدار، اما هیچ دلیلی برای هیچ یک از آنها وجود ندارد.".format(
+            "این کاربر {} / {} هشدار دارد، اما هیچ دلیلی برای هیچ یک از آنها وجود ندارد.".format(
                 num_warns, limit
             ),
         )
 
-    text = "این کاربر دارد {}/{} هشدار، به دلایل زیر:".format(
+    text = "این کاربر {}/{} هشدار دارد، به دلایل زیر:".format(
         num_warns, limit
     )
     text += "\r\n"
