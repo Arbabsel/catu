@@ -592,7 +592,7 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (Button.inline("بازکردن‌منو", data="mainmenu"),),
     ]
-    await event.edit("منو با موفقیت بسته شد✅", buttons=buttons)
+    await event.edit("**منو بسته شد✅**", buttons=buttons)
 
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
