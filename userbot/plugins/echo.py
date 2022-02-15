@@ -35,9 +35,9 @@ async def echo(event):
     "To echo the user messages"
     if event.reply_to_msg_id is None:
         return await edit_or_reply(
-            event, "`Reply to a User's message to echo his messages`"
+            event, "`به پیام کاربر پاسخ دهید تا پیام های او را اکو کنید`"
         )
-    catevent = await edit_or_reply(event, "`Adding Echo to user...`")
+    catevent = await edit_or_reply(event, "`در حال افزودن اکو به کاربر...`")
     user, rank = await get_user_from_event(event, catevent, nogroup=True)
     if not user:
         return
@@ -53,13 +53,13 @@ async def echo(event):
     user_name = user.first_name
     user_username = user.username
     if is_echo(chat_id, user_id):
-        return await edit_or_reply(event, "The user is already enabled with echo ")
+        return await edit_or_reply(event, "قبلا اکو روی کاربر فعال شده است")
     try:
         addecho(chat_id, user_id, chat_name, user_name, user_username, chat_type)
     except Exception as e:
         await edit_delete(catevent, f"**Error:**\n`{e}`")
     else:
-        await edit_or_reply(catevent, "Hi")
+        await edit_or_reply(catevent, "اکو")
 
 
 @catub.cat_cmd(
@@ -75,7 +75,7 @@ async def echo(event):
     "To stop echoing the user messages"
     if event.reply_to_msg_id is None:
         return await edit_or_reply(
-            event, "Reply to a User's message to echo his messages"
+            event, "به پیام کاربر پاسخ دهید تا پیام های او را اکو کنید"
         )
     reply_msg = await event.get_reply_message()
     user_id = reply_msg.sender_id
@@ -86,9 +86,9 @@ async def echo(event):
         except Exception as e:
             await edit_delete(catevent, f"**Error:**\n`{e}`")
         else:
-            await edit_or_reply(event, "Echo has been stopped for the user")
+            await edit_or_reply(event, "اکو برای کاربر متوقف شده است")
     else:
-        await edit_or_reply(event, "The user is not activated with echo")
+        await edit_or_reply(event, "کاربر با اکو فعال نمی شود")
 
 
 @catub.cat_cmd(
@@ -111,7 +111,7 @@ async def echo(event):
         lecho = get_all_echos()
         if len(lecho) == 0:
             return await edit_delete(
-                event, "You havent enabled echo atleast for one user in any chat."
+                event, "شما اکو را حداقل برای یک کاربر در هیچ چتی فعال نکرده اید."
             )
         try:
             remove_all_echos()
@@ -119,13 +119,13 @@ async def echo(event):
             await edit_delete(event, f"**Error:**\n`{str(e)}`", 10)
         else:
             await edit_or_reply(
-                event, "Deleted echo for all enabled users in all chats."
+                event, "اکو حذف شده برای همه کاربران فعال در همه چت ها."
             )
     else:
         lecho = get_echos(event.chat_id)
         if len(lecho) == 0:
             return await edit_delete(
-                event, "You havent enabled echo atleast for one user in this chat."
+                event, "شما اکو را حداقل برای یک کاربر در این چت فعال نکرده اید."
             )
         try:
             remove_echos(event.chat_id)
@@ -133,7 +133,7 @@ async def echo(event):
             await edit_delete(event, f"**Error:**\n`{e}`", 10)
         else:
             await edit_or_reply(
-                event, "Deleted echo for all enabled users in this chat"
+                event, "اکو برای همه کاربران فعال در این چت حذف شد"
             )
 
 
@@ -155,12 +155,12 @@ async def echo(event):  # sourcery no-metrics
     "To list all users on who you enabled echoing."
     input_str = event.pattern_match.group(1)
     private_chats = ""
-    output_str = "**Echo enabled users:**\n\n"
+    output_str = "**کاربران اکو فعال:**\n\n"
     if input_str:
         lsts = get_all_echos()
         group_chats = ""
         if len(lsts) <= 0:
-            return await edit_or_reply(event, "There are no echo enabled users")
+            return await edit_or_reply(event, "هیچ کاربر فعال اکو وجود ندارد")
         for echos in lsts:
             if echos.chat_type == "Personal":
                 if echos.user_username:
@@ -172,19 +172,19 @@ async def echo(event):  # sourcery no-metrics
                         f"☞ [{echos.user_name}](tg://user?id={echos.user_id})\n"
                     )
             elif echos.user_username:
-                group_chats += f"☞ [{echos.user_name}](https://t.me/{echos.user_username}) in chat {echos.chat_name} of chat id `{echos.chat_id}`\n"
+                group_chats += f"☞ [{echos.user_name}](https://t.me/{echos.user_username}) در چت {echos.chat_name} شناسه چت `{echos.chat_id}`\n"
             else:
-                group_chats += f"☞ [{echos.user_name}](tg://user?id={echos.user_id}) in chat {echos.chat_name} of chat id `{echos.chat_id}`\n"
+                group_chats += f"☞ [{echos.user_name}](tg://user?id={echos.user_id}) در چت {echos.chat_name} شناسه چت `{echos.chat_id}`\n"
 
         if private_chats != "":
-            output_str += "**Private Chats**\n" + private_chats + "\n\n"
+            output_str += "**چت های خصوصی**\n" + private_chats + "\n\n"
         if group_chats != "":
-            output_str += "**Group Chats**\n" + group_chats
+            output_str += "**چت های گروهی**\n" + group_chats
     else:
         lsts = get_echos(event.chat_id)
         if len(lsts) <= 0:
             return await edit_or_reply(
-                event, "There are no echo enabled users in this chat"
+                event, "هیچ کاربر دارای اکو فعال در این چت وجود ندارد"
             )
 
         for echos in lsts:
@@ -196,7 +196,7 @@ async def echo(event):  # sourcery no-metrics
                 private_chats += (
                     f"☞ [{echos.user_name}](tg://user?id={echos.user_id})\n"
                 )
-        output_str = "**Echo enabled users in this chat are:**\n" + private_chats
+        output_str = "**کاربران اکو فعال در این چت:**\n" + private_chats
 
     await edit_or_reply(event, output_str)
 
