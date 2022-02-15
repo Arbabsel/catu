@@ -59,13 +59,13 @@ async def _(event):
     try:
         pfile = await event.client.upload_file(profile_pic)
     except Exception as e:
-        return await edit_delete(event, f"**Failed to clone due to error:**\n__{e}__")
+        return await edit_delete(event, f"**شبیه سازی به دلیل خطا انجام نشد:**\n__{e}__")
     await event.client(functions.photos.UploadProfilePhotoRequest(pfile))
-    await edit_delete(event, "**LET US BE AS ONE**")
+    await edit_delete(event, "**بیایید ما یکی باشیم😊**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"#CLONED\nsuccessfully cloned [{first_name}](tg://user?id={user_id })",
+            f"#CLONED\با موفقیت اعمال شد✅ [{first_name}](tg://user?id={user_id })",
         )
 
 
@@ -91,9 +91,9 @@ async def _(event):
     await event.client(functions.account.UpdateProfileRequest(about=bio))
     await event.client(functions.account.UpdateProfileRequest(first_name=name))
     await event.client(functions.account.UpdateProfileRequest(last_name=blank))
-    await edit_delete(event, "successfully reverted to your account back")
+    await edit_delete(event, "با موفقیت به حساب شما برگردانده شد")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            "#REVERT\nsuccessfully reverted back to your profile",
+            "#REVERT\با موفقیت به نمایه شما بازگشت",
         )
