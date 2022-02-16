@@ -31,24 +31,24 @@ cmhd = Config.COMMAND_HAND_LER
 @catub.bot_cmd(pattern="^/help$", from_users=Config.OWNER_ID)
 async def bot_help(event):
     await event.reply(
-        f"""The commands in the bot are:
-**Note : **__This commands work only in this bot__ {botusername}
+        f"""دستورات موجود در ربات عبارتند از:
+**توجه : **__این دستورات فقط در این ربات کار می کنند__ {botusername}
 
-• **Cmd : **/uinfo <reply to user message>
-• **Info : **__You have noticed that forwarded stickers/emoji doesn't have forward tag so you can identify the user who sent thoose messages by this cmd.__
-• **Note : **__It works for all forwarded messages. even for users who's permission forward message nobody.__
+• **دستور : **/uinfo <reply to user message>
+• **اطلاعات : **__متوجه شده‌اید که استیکرها/اموجی‌های فوروارد شده دارای برچسب فوروارد نیستند، بنابراین می‌توانید کاربری را که آن پیام‌ها را با این دستور ارسال کرده است شناسایی کنید.__
+• **توجه : **__برای همه پیام های فوروارد شده کار می کند. حتی برای کاربرانی که به هیچ کس اجازه ارسال پیام نمی دهند.__
 
-• **Cmd : **/ban <reason> or /ban <username/userid> <reason>
-• **Info : **__Reply to a user message with reason so he will be notified as you banned from the bot and his messages will not be forworded to you further.__
-• **Note : **__Reason is must. without reason it won't work. __
+• **دستور : **/ban <reason> or /ban <username/userid> <reason>
+• **اطلاعات : **__به یک پیام کاربر با دلیل پاسخ دهید تا از آنجایی که شما از ربات منع شده اید به او اطلاع داده می شود و پیام های او بیشتر برای شما ارسال نمی شود.__
+• **توجه : **__بدون ارسال دلیل کار نخواهد کرد __
 
-• **Cmd : **/unban <reason(optional)> or /unban <username/userid>
-• **Info : **__Reply to user message or provide username/userid to unban from the bot.__
-• **Note : **__To check banned users list use__ `{cmhd}bblist`.
+• **دستور : **/unban <reason(optional)> or /unban <username/userid>
+• **اطلاعات : **__به پیام کاربر پاسخ دهید یا نام کاربری/کاربر را برای لغو بن از ربات ارائه دهید.__
+• **توجه : **__برای بررسی لیست کاربران بن شده استفاده کنید__ `{cmhd}bblist`.
 
-• **Cmd : **/broadcast
-• **Info : **__Reply to a message to get broadcasted to every user who started your bot. To get list of users use__ `{cmhd}bot_users`.
-• **Note : **__if user stoped/blocked the bot then he will be removed from your database that is he will erased from the bot_starters list.__
+• **دستور : **/broadcast
+• **اطلاعات : **__به یک پیام پاسخ دهید تا برای هر کاربری که ربات شما را راه اندازی کرده است پخش شود. برای دریافت لیست کاربران استفاده کنید__ `{cmhd}bot_users`.
+• **توجه : **__اگر کاربر ربات را متوقف/بلاک کرد، از پایگاه داده شما حذف خواهد شد که از لیست bot_starters پاک خواهد شد.__
 """
     )
 
@@ -57,21 +57,21 @@ async def bot_help(event):
 async def bot_broadcast(event):
     replied = await event.get_reply_message()
     if not replied:
-        return await event.reply("Reply to a message for Broadcasting First !")
+        return await event.reply("ابتدا به پیامی برای پخش پاسخ دهید!")
     start_ = datetime.now()
     br_cast = await replied.reply("Broadcasting ...")
     blocked_users = []
     count = 0
     bot_users_count = len(get_all_starters())
     if bot_users_count == 0:
-        return await event.reply("`No one started your bot yet.`")
+        return await event.reply("`هنوز کسی ربات شما را راه اندازی نکرده است.`")
     users = get_all_starters()
     if users is None:
-        return await event.reply("`Errors ocured while fetching users list.`")
+        return await event.reply("`هنگام دریافت کاربران خطاهایی رخ داد.`")
     for user in users:
         try:
             await event.client.send_message(
-                int(user.user_id), "🔊 You received a **new** Broadcast."
+                int(user.user_id), "🔊شما یک پیام **جدید**پخش کرده اید"
             )
             await event.client.send_message(int(user.user_id), replied)
             await asyncio.sleep(0.8)
@@ -83,7 +83,7 @@ async def bot_broadcast(event):
             LOGS.error(str(e))
             if BOTLOG:
                 await event.client.send_message(
-                    BOTLOG_CHATID, f"**Error while broadcasting**\n`{e}`"
+                    BOTLOG_CHATID, f"**خطا هنگام پخش❌**\n`{e}`"
                 )
 
         else:
@@ -96,18 +96,18 @@ async def bot_broadcast(event):
                             total=bot_users_count,
                             current=count + len(blocked_users),
                         )
-                        + f"\n\n• ✔️ **Success** :  `{count}`\n"
-                        + f"• ✖️ **Failed** :  `{len(blocked_users)}`"
+                        + f"\n\n• ✔️ **موفق** :  `{count}`\n"
+                        + f"• ✖️ **ناموفق** :  `{len(blocked_users)}`"
                     )
                     await br_cast.edit(prog_)
                 except FloodWaitError as e:
                     await asyncio.sleep(e.seconds)
     end_ = datetime.now()
-    b_info = f"🔊  Successfully broadcasted message to ➜  <b>{count} users.</b>"
+    b_info = f"🔊 پیام با موفقیت پخش شد ➜  <b>{count} users.</b>"
     if len(blocked_users) != 0:
-        b_info += f"\n🚫  <b>{len(blocked_users)} users</b> blocked your bot recently, so have been removed."
+        b_info += f"\n🚫  <b>{len(blocked_users)} users</b> اخیرا ربات شما را مسدود کرده است، بنابراین حذف شده اند."
     b_info += (
-        f"\n⏳  <code>Process took: {time_formatter((end_ - start_).seconds)}</code>."
+        f"\n⏳  <code>فرآیند انجام شد: {time_formatter((end_ - start_).seconds)}</code>."
     )
     await br_cast.edit(b_info, parse_mode="html")
 
@@ -125,10 +125,10 @@ async def ban_starters(event):
     "To get list of users who started bot."
     ulist = get_all_starters()
     if len(ulist) == 0:
-        return await edit_delete(event, "`No one started your bot yet.`")
+        return await edit_delete(event, "`هنوز کسی ربات شما را راه اندازی نکرده است.`")
     msg = "**The list of users who started your bot are :\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ایدی:** `{user.user_id}`\n**نام:** @{user.username}\n**تاریخ: **__{user.date}__\n\n"
     await edit_or_reply(event, msg)
 
 
@@ -138,11 +138,11 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`I can't find user to ban`", reply_to=reply_to
+            event.chat_id, "`من نمی توانم کاربری برای بن پیدا کنم`", reply_to=reply_to
         )
     if not reason:
         return await event.client.send_message(
-            event.chat_id, "`To ban the user provide reason first`", reply_to=reply_to
+            event.chat_id, "`برای بن کردن کاربر ابتدا دلیل ارائه کنید`", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
@@ -150,15 +150,15 @@ async def ban_botpms(event):
     except Exception as e:
         return await event.reply(f"**Error:**\n`{e}`")
     if user_id == Config.OWNER_ID:
-        return await event.reply("I can't ban you master")
+        return await event.reply("من نمی توانم شما را ممنوع کنم استاد")
     check = check_is_black_list(user.id)
     if check:
         return await event.client.send_message(
             event.chat_id,
             f"#Already_banned\
-            \nUser already exists in my Banned Users list.\
-            \n**Reason For Bot BAN:** `{check.reason}`\
-            \n**Date:** `{check.date}`.",
+            \nکاربر از قبل در لیست کاربران بن وجود دارد.\
+            \n**دلیل بن کردن ربات:** `{check.reason}`\
+            \n**تاریخ:** `{check.date}`.",
         )
     msg = await ban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
@@ -170,7 +170,7 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`I can't find user to unban`", reply_to=reply_to
+            event.chat_id, "`من نمی توانم کاربری برای لغو بن پیدا کنم`", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
@@ -182,7 +182,7 @@ async def ban_botpms(event):
         return await event.client.send_message(
             event.chat_id,
             f"#User_Not_Banned\
-            \n👤 {_format.mentionuser(user.first_name , user.id)} doesn't exist in my Banned Users list.",
+            \n👤 {_format.mentionuser(user.first_name , user.id)} در لیست کاربران بن وجود ندارد.",
         )
     msg = await unban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
@@ -201,10 +201,10 @@ async def ban_starters(event):
     "To get list of users who are banned in bot."
     ulist = get_all_bl_users()
     if len(ulist) == 0:
-        return await edit_delete(event, "`No one is banned in your bot yet.`")
-    msg = "**The list of users who are banned in your bot are :\n\n**"
+        return await edit_delete(event, "`هنوز کسی در ربات شما بن نشده است.`")
+    msg = "**لیست کاربرانی که در ربات شما بن شده اند عبارتند از:\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**ID:** `{user.chat_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason:** __{user.reason}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**ایدی:** `{user.chat_id}`\n**نام:** @{user.username}\n**تاریخ: **__{user.date}__\n**دلیل:** __{user.reason}__\n\n"
     await edit_or_reply(event, msg)
 
 
@@ -225,11 +225,11 @@ async def ban_antiflood(event):
     input_str = event.pattern_match.group(1)
     if input_str == "on":
         if gvarstatus("bot_antif") is not None:
-            return await edit_delete(event, "`Bot Antiflood was already enabled.`")
+            return await edit_delete(event, "`قبلا آنتی اسپم فعال شده است`")
         addgvar("bot_antif", True)
-        await edit_delete(event, "`Bot Antiflood Enabled.`")
+        await edit_delete(event, "`آنتی اسپم فعال شد`")
     elif input_str == "off":
         if gvarstatus("bot_antif") is None:
-            return await edit_delete(event, "`Bot Antiflood was already disabled.`")
+            return await edit_delete(event, "`قبلا آنتی اسپم غیرفعال شده است`")
         delgvar("bot_antif")
-        await edit_delete(event, "`Bot Antiflood Disabled.`")
+        await edit_delete(event, "`آنتی اسپم غیرفعال شد`")
