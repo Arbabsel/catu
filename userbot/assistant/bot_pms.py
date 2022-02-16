@@ -48,14 +48,14 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me 🤖\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} من را شروع کرده است 🤖\
+                \n**ایدی: **`{user.id}`\
+                \n**نام: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me 🤖\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} من را دوباره راه اندازی کرده است 🤖\
+                \n**ایدی: **`{user.id}`\
+                \n**نام: **{get_display_name(user)}"
     try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -103,22 +103,22 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention},\
-                        \nI am {my_mention}'s assistant bot of Manas.\
-                        \nYou can contact to my Master from here 🤖\
-                        \n\nDeveloped by [Manas]🙂"
+            start_msg = f"سلام! 👤{mention},\
+                        \nمن {my_mention}'ربات دستیار\
+                        \nاز اینجا میتونی با سازنده ارتباط بگیری🤖\
+                        \n\nساخته شده توسط کلانتر🙂"
         buttons = [
             (
-                Button.url("Repo", "https://t.me/SImB5XULV5RiZjg1"),
+                Button.url("id", "https://t.me/Cyber_kalantar"),
                 Button.url(
                     "Channel ",
-                    "https://t.me/SImB5XULV5RiZjg1",
+                    "https://t.me/channelpvkalantar",
                 ),
             )
         ]
     else:
-        start_msg = "Hey Master!🤖\
-            \nHow may I help you ?"
+        start_msg = "سلام استاد!🤖\
+            \nچگونه میتوانم به شما کمک کنم ?"
         buttons = None
     try:
         await event.client.send_message(
@@ -132,7 +132,7 @@ async def bot_start(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"**Error**\nThere was a error while user starting your bot.\\\x1f                \n`{e}`",
+                f"**Error**\nهنگام راه‌اندازی ربات توسط کاربر، خطایی روی داد.\\\x1f                \n`{e}`",
             )
 
     else:
@@ -153,7 +153,7 @@ async def bot_pms(event):  # sourcery no-metrics
             if BOTLOG:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                    f"**Error**\nهنگام ذخیره جزئیات پیام ها در پایگاه داده\n`{str(e)}`",
                 )
     else:
         if event.text.startswith("/"):
@@ -180,7 +180,7 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg, link_preview=False
                     )
             except UserIsBlockedError:
-                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
+                return await event.reply("این ربات توسط کاربر مسدود شده است ❌")
             except Exception as e:
                 return await event.reply(f"**Error:**\n`{e}`")
             try:
@@ -192,7 +192,7 @@ async def bot_pms(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{e}`",
+                        f"**Error**\nهنگام ذخیره جزئیات پیام ها در پایگاه داده\n`{e}`",
                     )
 
 
@@ -213,7 +213,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
         if reply_msg:
             await event.client.send_message(
                 Config.OWNER_ID,
-                f"⬆️ **This message was edited by the user** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
+                f"⬆️ **این پیام توسط کاربر ویرایش شده است** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
                 reply_to=reply_msg,
             )
             msg = await event.forward_to(Config.OWNER_ID)
@@ -224,7 +224,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{e}`",
+                        f"**Error**\nهنگام ذخیره جزئیات پیام ها در پایگاه داده\n`{e}`",
                     )
 
     else:
@@ -283,7 +283,7 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                        f"⬆️ **This message was deleted by the user** {_format.mentionuser(user_name , user_id)}.",
+                        f"⬆️ **این پیام توسط کاربر حذف شد** {_format.mentionuser(user_name , user_id)}.",
                         reply_to=reply_msg,
                     )
             except Exception as e:
@@ -294,16 +294,16 @@ async def handler(event):
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
-        return await event.reply("Reply to a message to get message info")
+        return await event.reply("برای دریافت اطلاعات پیام به یک پیام پاسخ دهید")
     info_msg = await event.client.send_message(
         event.chat_id,
-        "`🔎 Searching for this user in my database ...`",
+        "`🔎 درحال جستوی کاربر در پایگاه داده...`",
         reply_to=reply_to,
     )
     users = get_user_id(reply_to)
     if users is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**خطا:** \n`متأسفم!، نمی توان این کاربر را در پایگاه داده پیدا کرد:(`"
         )
     for usr in users:
         user_id = int(usr.chat_id)
@@ -311,11 +311,11 @@ async def bot_start(event):
         break
     if user_id is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**خطا:** \n`متأسفم!، نمی توان این کاربر را در پایگاه داده پیدا کرد:(`"
         )
-    uinfo = f"This message was sent by 👤 {_format.mentionuser(user_name , user_id)}\
-            \n**First Name:** {user_name}\
-            \n**User ID:** `{user_id}`"
+    uinfo = f"این پیام توسط 👤 {_format.mentionuser(user_name , user_id)}\
+            \n**نام کاربری:** {user_name}\
+            \n**ایدی:** `{user_id}`"
     await info_msg.edit(uinfo)
 
 
@@ -323,7 +323,7 @@ async def send_flood_alert(user_) -> None:
     # sourcery no-metrics
     buttons = [
         (
-            Button.inline("🚫  BAN", data=f"bot_pm_ban_{user_.id}"),
+            Button.inline("🚫  بن", data=f"bot_pm_ban_{user_.id}"),
             Button.inline(
                 "➖ Bot Antiflood [OFF]",
                 data="toggle_bot-antiflood_off",
@@ -342,7 +342,7 @@ async def send_flood_alert(user_) -> None:
             if BOTLOG:
                 await catub.tgbot.send_message(
                     BOTLOG_CHATID,
-                    f"**Error:**\nWhile updating flood count\n`{e}`",
+                    f"**Error:**\nهنگام به‌روزرسانی تعداد اسپم\n`{e}`",
                 )
 
         flood_count = FloodConfig.ALERT[user_.id]["count"]
@@ -352,11 +352,11 @@ async def send_flood_alert(user_) -> None:
     flood_msg = (
         r"⚠️ **#Flood_Warning**"
         "\n\n"
-        f"  ID: `{user_.id}`\n"
-        f"  Name: {get_display_name(user_)}\n"
-        f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
-        f"\n\n**Is spamming your bot !** ->  [ Flood rate ({flood_count}) ]\n"
-        "__Quick Action__: Ignored from bot for a while."
+        f"  ایدی: `{user_.id}`\n"
+        f"  نام: {get_display_name(user_)}\n"
+        f"  👤 کاربر: {_format.mentionuser(get_display_name(user_), user_.id)}"
+        f"\n\n**ربات شما را اسپم می کند !** ->  [ Flood rate ({flood_count}) ]\n"
+        "__Quick Action__: مدتی از ربات نادیده گرفته شد."
     )
 
     if found:
