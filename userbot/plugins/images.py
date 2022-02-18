@@ -37,9 +37,9 @@ async def img_sampler(event):
         query = str(event.pattern_match.group(2))
     if not query:
         return await edit_or_reply(
-            event, "Reply to a message or pass a query to search!"
+            event, "به یک پیام پاسخ دهید یا یک درخواست را برای جستجو ارسال کنید!"
         )
-    cat = await edit_or_reply(event, "`Processing...`")
+    cat = await edit_or_reply(event, "`درحال جستوجو عکس در گوگل...`")
     if event.pattern_match.group(1) != "":
         lim = int(event.pattern_match.group(1))
         if lim > 10:
