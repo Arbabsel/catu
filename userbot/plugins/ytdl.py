@@ -341,11 +341,11 @@ async def kakashi(event):
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         await edit_or_reply(
-            event, "` I need a Instagram link to download it's Video...`(*_*)"
+            event, "` برای دانلود، به لینک ویدیو اینستاگرام نیاز دارم...`(*_*)"
         )
     else:
         start = datetime.now()
-        catevent = await edit_or_reply(event, "**Downloading.....**")
+        catevent = await edit_or_reply(event, "**درحال دانلود...**")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -365,7 +365,7 @@ async def kakashi(event):
         end = datetime.now()
         ms = (end - start).seconds
         await cat.edit(
-            f"<b><i>➥ Video uploaded in {ms} seconds.</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+            f"<b><i>➥ آپلود ویدیو در{ms} ثانیه.</i></b>\n<b><i>➥ آپلود توسط :- {hmention}</i></b>",
             parse_mode="html",
         )
     await event.client.delete_messages(
