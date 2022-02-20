@@ -345,7 +345,7 @@ async def kakashi(event):
         )
     else:
         start = datetime.now()
-        catevent = await edit_or_reply(event, "**درحال دانلود...**")
+        catevent = await edit_or_reply(event, "** ⏳درحال دانلود...**")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -365,7 +365,7 @@ async def kakashi(event):
         end = datetime.now()
         ms = (end - start).seconds
         await cat.edit(
-            f"<b><i>➥ آپلود ویدیو در{ms} ثانیه.</i></b>\n<b><i>➥ آپلود توسط :- {hmention}</i></b>",
+            f"<b><i>➥ آپلود ویدیو در {ms} ثانیه.</i></b>\n<b><i>➥ آپلود توسط :- {hmention}</i></b>",
             parse_mode="html",
         )
     await event.client.delete_messages(
