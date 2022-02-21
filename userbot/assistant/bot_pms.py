@@ -106,10 +106,10 @@ async def bot_start(event):
             start_msg = f"سلام! 👤{mention},\
                         \nمن {my_mention}'ربات دستیار\
                         \nاز اینجا میتونی با سازنده ارتباط بگیری🤖\
-                        \n\nساخته شده توسط کلانتر🙂"
+                        \n\n🙂"
         buttons = [
             (
-                Button.url("id", "https://t.me/Cyber_kalantar"),
+                Button.url("Channel", "https://t.me/channelpvkalantar"),
                 Button.url(
                     "Channel ",
                     "https://t.me/channelpvkalantar",
