@@ -247,10 +247,10 @@ async def _(event):
         message = input_str
     else:
         return await edit_delete(
-            event, "`Either reply to message or give input to function properly`"
+            event, "`یا به پیام پاسخ دهید یا ورودی بدهید تا به درستی کار کند`"
         )
     chat = "@QuotLyBot"
-    catevent = await edit_or_reply(event, "```Making a Quote```")
+    catevent = await edit_or_reply(event, "```درحال ساخت استیکر...```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -262,11 +262,11 @@ async def _(event):
                 await event.client.send_message(conv.chat_id, message)
             else:
                 return await edit_delete(
-                    catevent, "`I guess you have used a invalid syntax`"
+                    catevent, "`من حدس می زنم که شما از یک نحو نامعتبر استفاده کرده اید`"
                 )
             response = await response
         except YouBlockedUserError:
-            return await catevent.edit("```Please unblock me (@QuotLyBot) u Nigga```")
+            return await catevent.edit("```لطفا این ربات را (@QuotLyBot) رفع انسداد کنید```")
         await event.client.send_read_acknowledge(conv.chat_id)
         await catevent.delete()
         await event.client.send_message(
