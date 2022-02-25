@@ -20,7 +20,7 @@ async def on_plug_in_callback_query_handler(event):
                 encrypted_tcxt = message["text"]
                 reply_pop_up_alert = encrypted_tcxt
             else:
-                reply_pop_up_alert = "جناپ چرا به این پیام نگاه می کردی برو و به کار زشتت فکر کن"
+                reply_pop_up_alert = "جناپ چرا سعی داری به این پیام نگاه کنی برو به کار زشتت فکر کن"
         except KeyError:
             reply_pop_up_alert = "این پیام دیگر در سرور وجود ندارد"
     else:
