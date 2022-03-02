@@ -41,21 +41,21 @@ async def _(event):
                     )
             except Exception as e:
                 LOGS.info(str(e))
-        await edit_or_reply(event, "`Either give input as username or reply to user`")
+        await edit_or_reply(event, "`برای دریافت آیدی عددی شخص ریپلای بزنین`")
     elif event.reply_to_msg_id:
         r_msg = await event.get_reply_message()
         if r_msg.media:
             bot_api_file_id = pack_bot_file_id(r_msg.media)
             await edit_or_reply(
                 event,
-                f"**Current Chat ID : **`{event.chat_id}`\n**From User ID: **`{r_msg.sender_id}`\n**Media File ID: **`{bot_api_file_id}`",
+                f"**آیدی عددی چت: **`{event.chat_id}`\n**آیدی عددی کاربر: **`{r_msg.sender_id}`\n**شناسه فایل رسانه: **`{bot_api_file_id}`",
             )
 
         else:
             await edit_or_reply(
                 event,
-                f"**Current Chat ID : **`{event.chat_id}`\n**From User ID: **`{r_msg.sender_id}`",
+                f"**آیدی عددی چت: **`{event.chat_id}`\n**آیدی عددی کاربر: **`{r_msg.sender_id}`",
             )
 
     else:
-        await edit_or_reply(event, f"**Current Chat ID : **`{event.chat_id}`")
+        await edit_or_reply(event, f"**آیدی عددی چت: **`{event.chat_id}`")
