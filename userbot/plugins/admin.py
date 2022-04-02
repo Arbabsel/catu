@@ -345,7 +345,7 @@ async def watcher(event):
 async def startmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("`ممکن است مسائل غیرمنتظره یا خطاهای زشتی رخ دهد!`")
+        await event.edit("`درحال سکوت کردن کاربر...`")
         await sleep(2)
         await event.get_reply_message()
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
@@ -379,7 +379,7 @@ async def startmute(event):
         if not user:
             return
         if user.id == catub.uid:
-            return await edit_or_reply(event, "`متاسفم، نمی توانم خودم را بی صدا کنم`")
+            return await edit_or_reply(event, "`متاسفم، نمی توانم خودت را بی صدا کنم`")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
                 event, "`این کاربر قبلاً در این گپ بی صدا شده است`"
@@ -402,7 +402,7 @@ async def startmute(event):
                 if chat.admin_rights.delete_messages is not True:
                     return await edit_or_reply(
                         event,
-                        "`اگر مجوز حذف پیام‌ها را نداشته باشید، نمی‌توانید فردی را بی‌صدا کنید.",
+                        "`اگر مجوز بن کردن کاربران را نداشته باشید، نمی‌توانید فردی را بی‌صدا کنید.",
                     )
             elif "creator" not in vars(chat):
                 return await edit_or_reply(
@@ -447,7 +447,7 @@ async def startmute(event):
 async def endmute(event):
     "To mute a person in that paticular chat"
     if event.is_private:
-        await event.edit("`ممکن است مسائل غیرمنتظره یا خطاهای زشتی رخ دهد!`")
+        await event.edit("`درحال آزاد کردن کاربر...`")
         await sleep(1)
         replied_user = await event.client(GetFullUserRequest(event.chat_id))
         if not is_muted(event.chat_id, event.chat_id):
